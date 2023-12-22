@@ -1,3 +1,5 @@
+using BusManager.Presentation.Views;
+
 namespace BusManager.Presentation
 {
     internal static class Program
@@ -11,7 +13,8 @@ namespace BusManager.Presentation
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginWindow());
+            WindowManager windowManager = WindowManager.Instance;
+            Application.Run(windowManager);
         }
     }
 }
