@@ -54,7 +54,7 @@ namespace BusManager.Presentation
             // PasswordField
             // 
             PasswordField.Anchor = AnchorStyles.None;
-            PasswordField.Location = new Point(325, 311);
+            PasswordField.Location = new Point(325, 305);
             PasswordField.Name = "PasswordField";
             PasswordField.PasswordChar = '*';
             PasswordField.PlaceholderText = "Password";
@@ -64,7 +64,7 @@ namespace BusManager.Presentation
             // emailField
             // 
             emailField.Anchor = AnchorStyles.None;
-            emailField.Location = new Point(325, 282);
+            emailField.Location = new Point(325, 275);
             emailField.Name = "emailField";
             emailField.PlaceholderText = "Email";
             emailField.Size = new Size(150, 23);
@@ -75,7 +75,7 @@ namespace BusManager.Presentation
             logo.Anchor = AnchorStyles.None;
             logo.ErrorImage = Properties.Resources.Logo;
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(212, 50);
+            logo.Location = new Point(212, 20);
             logo.Name = "logo";
             logo.Size = new Size(376, 210);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -86,7 +86,7 @@ namespace BusManager.Presentation
             // 
             registerButton.Anchor = AnchorStyles.None;
             registerButton.AutoSize = true;
-            registerButton.Location = new Point(354, 385);
+            registerButton.Location = new Point(354, 383);
             registerButton.Name = "registerButton";
             registerButton.Size = new Size(121, 15);
             registerButton.TabIndex = 4;

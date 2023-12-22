@@ -19,7 +19,13 @@ namespace BusManager.Presentation.Views
 
         public Panel GetPanel()
         {
-            return this.panel1;
+            return this.Panel;
+        }
+
+        private void registerButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            WindowManager windowManager = WindowManager.Instance;
+            windowManager.LoadScene(WindowManager.SCENES.LOGIN);
         }
     }
 
