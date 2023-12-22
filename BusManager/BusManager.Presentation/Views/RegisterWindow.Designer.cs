@@ -30,117 +30,117 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterWindow));
             Panel = new Panel();
-            logo = new PictureBox();
-            loginButton = new Button();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            LoginButton = new LinkLabel();
+            Logo = new PictureBox();
+            RegisterButton = new Button();
+            RepeatPasswordField = new TextBox();
             PasswordField = new TextBox();
-            registerButton = new LinkLabel();
+            EmailField = new TextBox();
+            LastNameField = new TextBox();
+            FirstNameField = new TextBox();
             Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
             SuspendLayout();
             // 
             // Panel
             // 
             Panel.Anchor = AnchorStyles.None;
-            Panel.Controls.Add(registerButton);
-            Panel.Controls.Add(logo);
-            Panel.Controls.Add(loginButton);
-            Panel.Controls.Add(textBox4);
-            Panel.Controls.Add(textBox3);
-            Panel.Controls.Add(textBox2);
-            Panel.Controls.Add(textBox1);
+            Panel.Controls.Add(LoginButton);
+            Panel.Controls.Add(Logo);
+            Panel.Controls.Add(RegisterButton);
+            Panel.Controls.Add(RepeatPasswordField);
             Panel.Controls.Add(PasswordField);
+            Panel.Controls.Add(EmailField);
+            Panel.Controls.Add(LastNameField);
+            Panel.Controls.Add(FirstNameField);
             Panel.Location = new Point(0, 0);
             Panel.Name = "Panel";
             Panel.Size = new Size(800, 450);
             Panel.TabIndex = 0;
             // 
-            // logo
+            // LoginButton
             // 
-            logo.Anchor = AnchorStyles.None;
-            logo.ErrorImage = Properties.Resources.Logo;
-            logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(212, 10);
-            logo.Name = "logo";
-            logo.Size = new Size(376, 210);
-            logo.SizeMode = PictureBoxSizeMode.StretchImage;
-            logo.TabIndex = 8;
-            logo.TabStop = false;
+            LoginButton.Anchor = AnchorStyles.None;
+            LoginButton.AutoSize = true;
+            LoginButton.Location = new Point(339, 413);
+            LoginButton.Name = "LoginButton";
+            LoginButton.Size = new Size(136, 15);
+            LoginButton.TabIndex = 9;
+            LoginButton.TabStop = true;
+            LoginButton.Text = "Have an Account? Login";
+            LoginButton.LinkClicked += registerButton_LinkClicked;
             // 
-            // loginButton
+            // Logo
             // 
-            loginButton.Anchor = AnchorStyles.None;
-            loginButton.Location = new Point(325, 370);
-            loginButton.Name = "loginButton";
-            loginButton.Size = new Size(150, 40);
-            loginButton.TabIndex = 7;
-            loginButton.Text = "Register";
-            loginButton.UseVisualStyleBackColor = true;
+            Logo.Anchor = AnchorStyles.None;
+            Logo.ErrorImage = Properties.Resources.Logo;
+            Logo.Image = (Image)resources.GetObject("Logo.Image");
+            Logo.Location = new Point(212, 10);
+            Logo.Name = "Logo";
+            Logo.Size = new Size(376, 210);
+            Logo.SizeMode = PictureBoxSizeMode.StretchImage;
+            Logo.TabIndex = 8;
+            Logo.TabStop = false;
             // 
-            // textBox4
+            // RegisterButton
             // 
-            textBox4.Anchor = AnchorStyles.None;
-            textBox4.Location = new Point(325, 340);
-            textBox4.Name = "textBox4";
-            textBox4.PasswordChar = '*';
-            textBox4.PlaceholderText = "Repeat Password";
-            textBox4.Size = new Size(150, 23);
-            textBox4.TabIndex = 6;
+            RegisterButton.Anchor = AnchorStyles.None;
+            RegisterButton.Location = new Point(325, 370);
+            RegisterButton.Name = "RegisterButton";
+            RegisterButton.Size = new Size(150, 40);
+            RegisterButton.TabIndex = 7;
+            RegisterButton.Text = "Register";
+            RegisterButton.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // RepeatPasswordField
             // 
-            textBox3.Anchor = AnchorStyles.None;
-            textBox3.Location = new Point(325, 310);
-            textBox3.Name = "textBox3";
-            textBox3.PasswordChar = '*';
-            textBox3.PlaceholderText = "Password";
-            textBox3.Size = new Size(150, 23);
-            textBox3.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            textBox2.Anchor = AnchorStyles.None;
-            textBox2.Location = new Point(325, 280);
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.PlaceholderText = "Email";
-            textBox2.Size = new Size(150, 23);
-            textBox2.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(325, 250);
-            textBox1.Name = "textBox1";
-            textBox1.PasswordChar = '*';
-            textBox1.PlaceholderText = "Last Name";
-            textBox1.Size = new Size(150, 23);
-            textBox1.TabIndex = 3;
+            RepeatPasswordField.Anchor = AnchorStyles.None;
+            RepeatPasswordField.Location = new Point(325, 340);
+            RepeatPasswordField.Name = "RepeatPasswordField";
+            RepeatPasswordField.PasswordChar = '*';
+            RepeatPasswordField.PlaceholderText = "Repeat Password";
+            RepeatPasswordField.Size = new Size(150, 23);
+            RepeatPasswordField.TabIndex = 6;
             // 
             // PasswordField
             // 
             PasswordField.Anchor = AnchorStyles.None;
-            PasswordField.Location = new Point(325, 220);
+            PasswordField.Location = new Point(325, 310);
             PasswordField.Name = "PasswordField";
             PasswordField.PasswordChar = '*';
-            PasswordField.PlaceholderText = "First Name";
+            PasswordField.PlaceholderText = "Password";
             PasswordField.Size = new Size(150, 23);
-            PasswordField.TabIndex = 2;
+            PasswordField.TabIndex = 5;
             // 
-            // registerButton
+            // EmailField
             // 
-            registerButton.Anchor = AnchorStyles.None;
-            registerButton.AutoSize = true;
-            registerButton.Location = new Point(339, 413);
-            registerButton.Name = "registerButton";
-            registerButton.Size = new Size(136, 15);
-            registerButton.TabIndex = 9;
-            registerButton.TabStop = true;
-            registerButton.Text = "Have an Account? Login";
-            registerButton.LinkClicked += registerButton_LinkClicked;
+            EmailField.Anchor = AnchorStyles.None;
+            EmailField.Location = new Point(325, 280);
+            EmailField.Name = "EmailField";
+            EmailField.PasswordChar = '*';
+            EmailField.PlaceholderText = "Email";
+            EmailField.Size = new Size(150, 23);
+            EmailField.TabIndex = 4;
+            // 
+            // LastNameField
+            // 
+            LastNameField.Anchor = AnchorStyles.None;
+            LastNameField.Location = new Point(325, 250);
+            LastNameField.Name = "LastNameField";
+            LastNameField.PasswordChar = '*';
+            LastNameField.PlaceholderText = "Last Name";
+            LastNameField.Size = new Size(150, 23);
+            LastNameField.TabIndex = 3;
+            // 
+            // FirstNameField
+            // 
+            FirstNameField.Anchor = AnchorStyles.None;
+            FirstNameField.Location = new Point(325, 220);
+            FirstNameField.Name = "FirstNameField";
+            FirstNameField.PasswordChar = '*';
+            FirstNameField.PlaceholderText = "First Name";
+            FirstNameField.Size = new Size(150, 23);
+            FirstNameField.TabIndex = 2;
             // 
             // RegisterWindow
             // 
@@ -152,20 +152,20 @@
             Text = "RegisterWindow";
             Panel.ResumeLayout(false);
             Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Logo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel Panel;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox RepeatPasswordField;
         private TextBox PasswordField;
-        private Button loginButton;
-        private PictureBox logo;
-        private LinkLabel registerButton;
+        private TextBox EmailField;
+        private TextBox LastNameField;
+        private TextBox FirstNameField;
+        private Button RegisterButton;
+        private PictureBox Logo;
+        private LinkLabel LoginButton;
     }
 }
