@@ -1,3 +1,5 @@
+using BusManager.Presentation.Views;
+
 namespace BusManager.Presentation
 {
     public partial class LoginWindow : Form
@@ -6,10 +8,15 @@ namespace BusManager.Presentation
         {
             InitializeComponent();
         }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        public Panel GetPanel()
         {
+            return Panel;
+        }
 
+        private void registerButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            WindowManager windowManager = WindowManager.Instance;
+            windowManager.LoadScene(WindowManager.SCENES.REGISTER);
         }
     }
 }

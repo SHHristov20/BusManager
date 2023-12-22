@@ -31,28 +31,30 @@ namespace BusManager.Presentation
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginWindow));
-            loginField = new Button();
+            loginButton = new Button();
             PasswordField = new TextBox();
             emailField = new TextBox();
             logo = new PictureBox();
             registerButton = new LinkLabel();
+            Panel = new Panel();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
+            Panel.SuspendLayout();
             SuspendLayout();
             // 
-            // loginField
+            // loginButton
             // 
-            loginField.Anchor = AnchorStyles.None;
-            loginField.Location = new Point(325, 340);
-            loginField.Name = "loginField";
-            loginField.Size = new Size(150, 40);
-            loginField.TabIndex = 0;
-            loginField.Text = "Login";
-            loginField.UseVisualStyleBackColor = true;
+            loginButton.Anchor = AnchorStyles.None;
+            loginButton.Location = new Point(325, 340);
+            loginButton.Name = "loginButton";
+            loginButton.Size = new Size(150, 40);
+            loginButton.TabIndex = 0;
+            loginButton.Text = "Login";
+            loginButton.UseVisualStyleBackColor = true;
             // 
             // PasswordField
             // 
             PasswordField.Anchor = AnchorStyles.None;
-            PasswordField.Location = new Point(325, 298);
+            PasswordField.Location = new Point(325, 311);
             PasswordField.Name = "PasswordField";
             PasswordField.PasswordChar = '*';
             PasswordField.PlaceholderText = "Password";
@@ -62,7 +64,7 @@ namespace BusManager.Presentation
             // emailField
             // 
             emailField.Anchor = AnchorStyles.None;
-            emailField.Location = new Point(325, 257);
+            emailField.Location = new Point(325, 282);
             emailField.Name = "emailField";
             emailField.PlaceholderText = "Email";
             emailField.Size = new Size(150, 23);
@@ -73,7 +75,7 @@ namespace BusManager.Presentation
             logo.Anchor = AnchorStyles.None;
             logo.ErrorImage = Properties.Resources.Logo;
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(212, 2);
+            logo.Location = new Point(212, 50);
             logo.Name = "logo";
             logo.Size = new Size(376, 210);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -82,38 +84,50 @@ namespace BusManager.Presentation
             // 
             // registerButton
             // 
+            registerButton.Anchor = AnchorStyles.None;
             registerButton.AutoSize = true;
-            registerButton.Location = new Point(354, 383);
+            registerButton.Location = new Point(354, 385);
             registerButton.Name = "registerButton";
             registerButton.Size = new Size(121, 15);
             registerButton.TabIndex = 4;
             registerButton.TabStop = true;
             registerButton.Text = "No Account? Register";
-            registerButton.LinkClicked += linkLabel1_LinkClicked;
+            registerButton.LinkClicked += registerButton_LinkClicked;
+            // 
+            // Panel
+            // 
+            Panel.Anchor = AnchorStyles.None;
+            Panel.Controls.Add(logo);
+            Panel.Controls.Add(loginButton);
+            Panel.Controls.Add(PasswordField);
+            Panel.Controls.Add(registerButton);
+            Panel.Controls.Add(emailField);
+            Panel.Location = new Point(0, 0);
+            Panel.Name = "Panel";
+            Panel.Size = new Size(800, 450);
+            Panel.TabIndex = 5;
             // 
             // LoginWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(registerButton);
-            Controls.Add(logo);
-            Controls.Add(emailField);
-            Controls.Add(PasswordField);
-            Controls.Add(loginField);
+            Controls.Add(Panel);
             Name = "LoginWindow";
             Text = "Bus Manager";
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
+            Panel.ResumeLayout(false);
+            Panel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Button loginField;
+        private Button loginButton;
         private TextBox PasswordField;
         private TextBox emailField;
         private PictureBox logo;
         private LinkLabel registerButton;
+        private Panel Panel;
     }
 }
