@@ -68,7 +68,7 @@
             LoginButton.TabIndex = 9;
             LoginButton.TabStop = true;
             LoginButton.Text = "Have an Account? Login";
-            LoginButton.LinkClicked += registerButton_LinkClicked;
+            LoginButton.LinkClicked += LoginButton_LinkClicked;
             // 
             // Logo
             // 

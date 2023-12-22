@@ -13,7 +13,7 @@ namespace BusManager.Presentation
             return Panel;
         }
 
-        private void registerButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void RegisterButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoadScene(WindowManager.SCENES.REGISTER);

@@ -22,7 +22,7 @@ namespace BusManager.Presentation.Views
             return this.Panel;
         }
 
-        private void registerButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LoginButton_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoadScene(WindowManager.SCENES.LOGIN);

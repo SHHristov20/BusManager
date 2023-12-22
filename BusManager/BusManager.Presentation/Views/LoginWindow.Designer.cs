@@ -92,7 +92,7 @@ namespace BusManager.Presentation
             RegisterButton.TabIndex = 4;
             RegisterButton.TabStop = true;
             RegisterButton.Text = "No Account? Register";
-            RegisterButton.LinkClicked += registerButton_LinkClicked;
+            RegisterButton.LinkClicked += RegisterButton_LinkClicked;
             // 
             // Panel
             // 
