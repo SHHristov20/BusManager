@@ -12,7 +12,7 @@ namespace BusManager.Presentation.Views
 {
     public partial class WindowManager : Form
     {
-        private static WindowManager instance;
+        private static WindowManager instance = null!;
 
         private readonly LoginWindow loginWindow = new();
         private readonly RegisterWindow registerWindow = new();
@@ -27,10 +27,7 @@ namespace BusManager.Presentation.Views
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new WindowManager();
-                }
+                instance ??= new WindowManager();
                 return instance;
             }
         }
