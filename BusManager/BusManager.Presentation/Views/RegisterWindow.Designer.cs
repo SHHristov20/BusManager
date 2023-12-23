@@ -91,6 +91,7 @@
             RegisterButton.TabIndex = 7;
             RegisterButton.Text = "Register";
             RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.Click += RegisterButton_Click;
             // 
             // RepeatPasswordField
             // 
@@ -117,7 +118,6 @@
             EmailField.Anchor = AnchorStyles.None;
             EmailField.Location = new Point(325, 280);
             EmailField.Name = "EmailField";
-            EmailField.PasswordChar = '*';
             EmailField.PlaceholderText = "Email";
             EmailField.Size = new Size(150, 23);
             EmailField.TabIndex = 4;
@@ -127,7 +127,6 @@
             LastNameField.Anchor = AnchorStyles.None;
             LastNameField.Location = new Point(325, 250);
             LastNameField.Name = "LastNameField";
-            LastNameField.PasswordChar = '*';
             LastNameField.PlaceholderText = "Last Name";
             LastNameField.Size = new Size(150, 23);
             LastNameField.TabIndex = 3;
@@ -137,7 +136,6 @@
             FirstNameField.Anchor = AnchorStyles.None;
             FirstNameField.Location = new Point(325, 220);
             FirstNameField.Name = "FirstNameField";
-            FirstNameField.PasswordChar = '*';
             FirstNameField.PlaceholderText = "First Name";
             FirstNameField.Size = new Size(150, 23);
             FirstNameField.TabIndex = 2;

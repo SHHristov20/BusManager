@@ -10,7 +10,7 @@ namespace BusManager.Core.Validators
     internal class UserValidator
     {
         public UserValidator() { }
-        private static bool ValidateName(string name)
+        public static bool ValidateName(string name)
         {
             string pattern = @"^[a-zA-Z-' ]+$";
 
@@ -18,7 +18,7 @@ namespace BusManager.Core.Validators
 
             return regex.IsMatch(name);
         }
-        private static bool ValidateEmail(string email)
+        public static bool ValidateEmail(string email)
         {
             string pattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
@@ -26,17 +26,17 @@ namespace BusManager.Core.Validators
 
             return regex.IsMatch(email);
         }
-        private static bool ValidatePassword(string password)
+        public static bool ValidatePassword(string password)
         {
-            string pattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$";
+            string pattern = @"^.{8,}$";
 
             Regex regex = new(pattern);
 
             return regex.IsMatch(password);
         }
-        public static bool ValidateUser(string fName, string lName, string email, string password) 
-        { 
-            return ValidateName(fName) && ValidateName(lName) && ValidateEmail(email) && ValidatePassword(password);
+        public static bool PasswordsMatch(string password, string repeatPassword)
+        {
+            return password == repeatPassword;
         }
     }
 }
