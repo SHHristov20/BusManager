@@ -1,4 +1,6 @@
 ﻿using BusManager.Core.Implementations;
+using BusManager.Core.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,17 +32,20 @@ namespace BusManager.Presentation.Views
             windowManager.LoadScene(WindowManager.SCENES.LOGIN);
         }
 
-        private void RegisterButton_Click(object sender, EventArgs e)
+        private async void RegisterButton_ClickAsync(object sender, EventArgs e)
         {
             string fName = FirstNameField.Text;
             string lName = LastNameField.Text;
             string email = EmailField.Text;
             string password = PasswordField.Text;
             string repeatPassword = RepeatPasswordField.Text;
-            UserService userService = new();
+            //UserService userService = new();
+            var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
             try
             {
-                userService.Register(fName, lName, email, password, repeatPassword);
+                bool a = await userService.Register(fName, lName, email, password, repeatPassword);
+                MessageBox.Show(a.ToString());
+
             }
             catch (AggregateException errors)
             {

@@ -1,17 +1,23 @@
 using BusManager.Presentation.Views;
+using Microsoft.Extensions.DependencyInjection;
+using BusManager.Data.Data.Contexts;
+using BusManager.Data.Data.Repositories;
+using BusManager.Core.Interfaces;
+using BusManager.Core.Implementations;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace BusManager.Presentation
 {
-    internal static class Program
+    internal static class BusManager
     {
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             WindowManager windowManager = WindowManager.Instance;
             Application.Run(windowManager);

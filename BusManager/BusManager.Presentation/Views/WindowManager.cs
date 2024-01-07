@@ -1,4 +1,9 @@
-﻿using System;
+﻿using BusManager.Core.Implementations;
+using BusManager.Core.Interfaces;
+using BusManager.Data.Data.Contexts;
+using BusManager.Data.Data.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,8 +22,16 @@ namespace BusManager.Presentation.Views
         private readonly LoginWindow loginWindow = new();
         private readonly RegisterWindow registerWindow = new();
 
+        public ServiceProvider serviceProvider = new ServiceCollection()
+            .AddDbContext<BusManagerDbContext>()
+            .AddSingleton<UserRepository>()
+            .AddSingleton<UserTypeRepository>()
+            .AddSingleton<IUserService, UserService>()
+            .BuildServiceProvider();
+
         private WindowManager()
         {
+            
             InitializeComponent();
             LoadScene(SCENES.LOGIN);
         }

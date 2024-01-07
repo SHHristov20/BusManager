@@ -91,7 +91,7 @@
             RegisterButton.TabIndex = 7;
             RegisterButton.Text = "Register";
             RegisterButton.UseVisualStyleBackColor = true;
-            RegisterButton.Click += RegisterButton_Click;
+            RegisterButton.Click += RegisterButton_ClickAsync;
             // 
             // RepeatPasswordField
             // 

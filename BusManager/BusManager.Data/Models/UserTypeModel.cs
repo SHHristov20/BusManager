@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusManager.Data.Models
 {
-    internal class UserType
+    public class UserType
     {
         public int Id { get; set; }
 

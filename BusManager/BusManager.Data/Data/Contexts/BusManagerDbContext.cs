@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace BusManager.Data.Data.Contexts
 {
-    internal class BusManagerDbContext : DbContext
+    public class BusManagerDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+
+        public BusManagerDbContext(DbContextOptions<BusManagerDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BusManager;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
                 .Property(x => x.Id)
                 .UseIdentityColumn();
