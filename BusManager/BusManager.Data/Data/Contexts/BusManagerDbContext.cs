@@ -13,9 +13,9 @@ namespace BusManager.Data.Data.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
 
+        public BusManagerDbContext() { }
         public BusManagerDbContext(DbContextOptions<BusManagerDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

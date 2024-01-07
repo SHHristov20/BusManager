@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusManager.Data.Migrations
 {
     [DbContext(typeof(BusManagerDbContext))]
-    [Migration("20231223123617_CreateUsers")]
-    partial class CreateUsers
+    [Migration("20240107173203_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

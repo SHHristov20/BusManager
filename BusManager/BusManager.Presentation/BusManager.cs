@@ -18,7 +18,7 @@ namespace BusManager.Presentation
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize();
+        ApplicationConfiguration.Initialize();
             WindowManager windowManager = WindowManager.Instance;
             Application.Run(windowManager);
         }
