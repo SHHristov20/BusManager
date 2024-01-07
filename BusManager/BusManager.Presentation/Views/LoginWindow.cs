@@ -1,4 +1,6 @@
+using BusManager.Core.Interfaces;
 using BusManager.Presentation.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BusManager.Presentation
 {
@@ -17,6 +19,21 @@ namespace BusManager.Presentation
         {
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoadScene(WindowManager.SCENES.REGISTER);
+        }
+
+        private async void LoginButton_Click(object sender, EventArgs e)
+        {
+            string email = EmailField.Text;
+            string password = PasswordField.Text;
+            var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
+            try
+            {
+                bool logged = await userService.Login(email, password);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -43,8 +43,11 @@ namespace BusManager.Presentation.Views
             var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
             try
             {
-                bool a = await userService.Register(fName, lName, email, password, repeatPassword);
-                MessageBox.Show(a.ToString());
+                bool registered = await userService.Register(fName, lName, email, password, repeatPassword);
+                if(registered)
+                {
+                    MessageBox.Show("Sucess");
+                }
 
             }
             catch (AggregateException errors)

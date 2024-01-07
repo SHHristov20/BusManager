@@ -50,6 +50,7 @@ namespace BusManager.Presentation
             LoginButton.TabIndex = 0;
             LoginButton.Text = "Login";
             LoginButton.UseVisualStyleBackColor = true;
+            LoginButton.Click += LoginButton_Click;
             // 
             // PasswordField
             // 
@@ -73,7 +74,6 @@ namespace BusManager.Presentation
             // Logo
             // 
             Logo.Anchor = AnchorStyles.None;
-            Logo.ErrorImage = Properties.Resources.Logo;
             Logo.Image = (Image)resources.GetObject("Logo.Image");
             Logo.Location = new Point(212, 20);
             Logo.Name = "Logo";

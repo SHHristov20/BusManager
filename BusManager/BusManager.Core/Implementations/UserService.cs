@@ -20,13 +20,12 @@ namespace BusManager.Core.Implementations
         {
             _userRepository = userRepository;
         }
-        public bool Login(string username, string password) 
+        public async Task<bool> Login(string email, string password) 
         {
-            if(username == "" || password == null)
-            {
-                throw new ArgumentException("Invalid username");
-            }
-            return false; 
+            if(email == "" || password == "") { throw new Exception("Please fill all fields"); }
+            var user = await _userRepository.FindUserByEmail(email) ?? throw new Exception("User does not exist");
+            if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new Exception("Invalid password");
+            return true;
         }
         public async Task<bool> Register(string fName, string lName, string email, string password, string repeatPassword) 
         {
