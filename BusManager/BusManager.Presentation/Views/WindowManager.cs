@@ -19,7 +19,7 @@ namespace BusManager.Presentation.Views
     public partial class WindowManager : Form
     {
         private static WindowManager instance = null!;
-        public User LoggedUser { get; set; } = null!;
+        public User? LoggedUser { get; set; } = null!;
 
         private readonly LoginWindow loginWindow = new();
         private readonly RegisterWindow registerWindow = new();

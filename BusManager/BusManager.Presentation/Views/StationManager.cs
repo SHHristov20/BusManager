@@ -32,26 +32,17 @@ namespace BusManager.Presentation.Views
 
         private async void PopulateCitiesList(/*object sender, PaintEventArgs e*/)
         {
+            stationCityList.Items.Clear();
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             List<string> cities = await stationService.GetAllCitiesStrings();
             stationCityList.Items.AddRange([.. cities]);
             this.LoadStationsTable();
 
-            for (int i = 0; i < cities.Count; i++)
-            {
-                //Debug.WriteLine(cities[i]);
-                //Label stationName = new Label();
-                //stationName.Text = cities[i];
-                //stationName.Anchor = AnchorStyles.None;
-                //this.stationsTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
-                //this.stationsTable.Controls.Add(stationName, 0, i);
-                //stationCityList.Items.Add(cities[i]);
-            }
-
         }
         private async void LoadStationsTable()
         {
             //stationsTable.RowStyles[0].;
+            stationsTable.Controls.Clear();
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             List<Station> stations = await stationService.GetAllStationsList();
             for (int i = 0; i < stations.Count; i++)
@@ -71,7 +62,7 @@ namespace BusManager.Presentation.Views
                 stationInfo.AutoSize = true;
                 deleteStation.Text = "Delete station";
                 deleteStation.AutoSize = true;
-                deleteStation.Location = new Point(370, panel.Height/2 - deleteStation.Height/2);
+                deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
                 int stationIndex = i;
                 deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, stations[stationIndex], panel);
                 panel.Controls.Add(stationName);
@@ -123,9 +114,9 @@ namespace BusManager.Presentation.Views
         {
             if (this.stationNameField.Text.Length <= 0) this.errorProvider1.SetError(this.stationNameField, "Name is required.");
             else this.errorProvider1.SetError(this.stationNameField, string.Empty);
-            if (this.stationAddressField.Text.Length <= 0 ) this.errorProvider1.SetError(this.stationAddressField, "Address is required.");
+            if (this.stationAddressField.Text.Length <= 0) this.errorProvider1.SetError(this.stationAddressField, "Address is required.");
             else this.errorProvider1.SetError(this.stationAddressField, string.Empty);
-            if (this.stationCityList.SelectedIndex == -1 ) this.errorProvider1.SetError(this.stationCityList, "City is required.");
+            if (this.stationCityList.SelectedIndex == -1) this.errorProvider1.SetError(this.stationCityList, "City is required.");
             else this.errorProvider1.SetError(this.stationCityList, string.Empty);
             if (string.IsNullOrEmpty(errorProvider1.GetError(stationNameField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationAddressField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationCityList)))
             {
@@ -136,6 +127,13 @@ namespace BusManager.Presentation.Views
                 //else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            WindowManager windowManager = WindowManager.Instance;
+            windowManager.LoggedUser = null;
+            windowManager.LoadScene(WindowManager.SCENES.LOGIN);
         }
     }
 }

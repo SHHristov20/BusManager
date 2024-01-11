@@ -50,6 +50,7 @@ namespace BusManager.Presentation.Views
             button3 = new Button();
             label1 = new Label();
             errorProvider1 = new ErrorProvider(components);
+            logoutButton = new Button();
             Panel.SuspendLayout();
             navPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -158,15 +159,15 @@ namespace BusManager.Presentation.Views
             stationsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             stationsTable.Location = new Point(274, 33);
             stationsTable.Name = "stationsTable";
+            stationsTable.Padding = new Padding(0, 0, 17, 0);
             stationsTable.Size = new Size(530, 414);
             stationsTable.TabIndex = 1;
-            int vertScrollWidth = SystemInformation.VerticalScrollBarWidth;
-            stationsTable.Padding = new Padding(0, 0, vertScrollWidth, 0);
             // 
             // navPanel
             // 
             navPanel.Anchor = AnchorStyles.None;
             navPanel.BackColor = SystemColors.AppWorkspace;
+            navPanel.Controls.Add(logoutButton);
             navPanel.Controls.Add(button4);
             navPanel.Controls.Add(button1);
             navPanel.Controls.Add(button3);
@@ -220,6 +221,16 @@ namespace BusManager.Presentation.Views
             errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider1.ContainerControl = this;
             // 
+            // logoutButton
+            // 
+            logoutButton.Location = new Point(713, 2);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(75, 25);
+            logoutButton.TabIndex = 5;
+            logoutButton.Text = "Logout";
+            logoutButton.UseVisualStyleBackColor = true;
+            logoutButton.Click += logoutButton_Click;
+            // 
             // StationManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -253,5 +264,6 @@ namespace BusManager.Presentation.Views
         private Label stationAddressLabel;
         private Label stationNameLabel;
         private ErrorProvider errorProvider1;
+        private Button logoutButton;
     }
 }
