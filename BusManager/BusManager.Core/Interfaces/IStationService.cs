@@ -11,5 +11,6 @@ namespace BusManager.Core.Interfaces
     {
         Task<List<String>> GetAllCitiesStrings();
         Task<List<Station>> GetAllStationsList();
+        Task<bool> CreateStation(string name, string address, int cityId);
     }
 }

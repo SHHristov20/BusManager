@@ -28,6 +28,7 @@ namespace BusManager.Presentation.Views
             .AddSingleton<UserRepository>()
             .AddSingleton<UserTypeRepository>()
             .AddSingleton<CityRepository>()
+            .AddSingleton<StationRepository>()
             .AddSingleton<IUserService, UserService>()
             .AddSingleton<IStationService, StationService>()
             .BuildServiceProvider();

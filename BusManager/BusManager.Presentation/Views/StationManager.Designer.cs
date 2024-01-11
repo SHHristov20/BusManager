@@ -33,104 +33,110 @@ namespace BusManager.Presentation.Views
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Panel = new Panel();
-            button2 = new Button();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            comboBox1 = new ComboBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            addStationButton = new Button();
+            stationCityLabel = new Label();
+            stationAddressLabel = new Label();
+            stationNameLabel = new Label();
+            stationCityList = new ComboBox();
+            stationAddressField = new TextBox();
+            stationNameField = new TextBox();
             createStationLabel = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            panel2 = new Panel();
+            stationsTable = new TableLayoutPanel();
+            navPanel = new Panel();
             button4 = new Button();
             button1 = new Button();
             button3 = new Button();
             label1 = new Label();
+            errorProvider1 = new ErrorProvider(components);
             Panel.SuspendLayout();
-            panel2.SuspendLayout();
+            navPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // Panel
             // 
             Panel.Anchor = AnchorStyles.None;
-            Panel.Controls.Add(button2);
-            Panel.Controls.Add(label4);
-            Panel.Controls.Add(label3);
-            Panel.Controls.Add(label2);
-            Panel.Controls.Add(comboBox1);
-            Panel.Controls.Add(textBox2);
-            Panel.Controls.Add(textBox1);
+            Panel.Controls.Add(addStationButton);
+            Panel.Controls.Add(stationCityLabel);
+            Panel.Controls.Add(stationAddressLabel);
+            Panel.Controls.Add(stationNameLabel);
+            Panel.Controls.Add(stationCityList);
+            Panel.Controls.Add(stationAddressField);
+            Panel.Controls.Add(stationNameField);
             Panel.Controls.Add(createStationLabel);
-            Panel.Controls.Add(tableLayoutPanel1);
-            Panel.Controls.Add(panel2);
+            Panel.Controls.Add(stationsTable);
+            Panel.Controls.Add(navPanel);
             Panel.Location = new Point(0, 0);
             Panel.Name = "Panel";
             Panel.Size = new Size(800, 450);
             Panel.TabIndex = 1;
             // 
-            // button2
+            // addStationButton
             // 
-            button2.Location = new Point(168, 408);
-            button2.Name = "button2";
-            button2.Size = new Size(100, 30);
-            button2.TabIndex = 9;
-            button2.Text = "Add station";
-            button2.UseVisualStyleBackColor = true;
+            addStationButton.Location = new Point(168, 408);
+            addStationButton.Name = "addStationButton";
+            addStationButton.Size = new Size(100, 30);
+            addStationButton.TabIndex = 9;
+            addStationButton.Text = "Add station";
+            addStationButton.UseVisualStyleBackColor = true;
+            addStationButton.Click += addStationButton_Click;
             // 
-            // label4
+            // stationCityLabel
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10F);
-            label4.ForeColor = SystemColors.ControlText;
-            label4.Location = new Point(12, 214);
-            label4.Name = "label4";
-            label4.Size = new Size(36, 19);
-            label4.TabIndex = 8;
-            label4.Text = "City:";
+            stationCityLabel.AutoSize = true;
+            stationCityLabel.Font = new Font("Segoe UI", 10F);
+            stationCityLabel.ForeColor = SystemColors.ControlText;
+            stationCityLabel.Location = new Point(12, 214);
+            stationCityLabel.Name = "stationCityLabel";
+            stationCityLabel.Size = new Size(36, 19);
+            stationCityLabel.TabIndex = 8;
+            stationCityLabel.Text = "City:";
             // 
-            // label3
+            // stationAddressLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(12, 151);
-            label3.Name = "label3";
-            label3.Size = new Size(61, 19);
-            label3.TabIndex = 7;
-            label3.Text = "Address:";
+            stationAddressLabel.AutoSize = true;
+            stationAddressLabel.Font = new Font("Segoe UI", 10F);
+            stationAddressLabel.Location = new Point(12, 151);
+            stationAddressLabel.Name = "stationAddressLabel";
+            stationAddressLabel.Size = new Size(61, 19);
+            stationAddressLabel.TabIndex = 7;
+            stationAddressLabel.Text = "Address:";
             // 
-            // label2
+            // stationNameLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(12, 88);
-            label2.Name = "label2";
-            label2.Size = new Size(48, 19);
-            label2.TabIndex = 6;
-            label2.Text = "Name:";
+            stationNameLabel.AutoSize = true;
+            stationNameLabel.Font = new Font("Segoe UI", 10F);
+            stationNameLabel.Location = new Point(12, 88);
+            stationNameLabel.Name = "stationNameLabel";
+            stationNameLabel.Size = new Size(48, 19);
+            stationNameLabel.TabIndex = 6;
+            stationNameLabel.Text = "Name:";
             // 
-            // comboBox1
+            // stationCityList
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 236);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(200, 23);
-            comboBox1.TabIndex = 5;
+            stationCityList.DropDownStyle = ComboBoxStyle.DropDownList;
+            stationCityList.FormattingEnabled = true;
+            stationCityList.Location = new Point(12, 236);
+            stationCityList.Name = "stationCityList";
+            stationCityList.Size = new Size(200, 23);
+            stationCityList.TabIndex = 5;
             // 
-            // textBox2
+            // stationAddressField
             // 
-            textBox2.Location = new Point(12, 173);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(200, 23);
-            textBox2.TabIndex = 4;
+            stationAddressField.Location = new Point(12, 173);
+            stationAddressField.Name = "stationAddressField";
+            stationAddressField.Size = new Size(200, 23);
+            stationAddressField.TabIndex = 4;
             // 
-            // textBox1
+            // stationNameField
             // 
-            textBox1.Location = new Point(12, 110);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(200, 23);
-            textBox1.TabIndex = 3;
+            errorProvider1.SetIconPadding(stationNameField, 2);
+            stationNameField.Location = new Point(12, 110);
+            stationNameField.Name = "stationNameField";
+            stationNameField.Size = new Size(200, 23);
+            stationNameField.TabIndex = 3;
             // 
             // createStationLabel
             // 
@@ -144,28 +150,28 @@ namespace BusManager.Presentation.Views
             createStationLabel.TabIndex = 2;
             createStationLabel.Text = "Create new bus station";
             // 
-            // tableLayoutPanel1
+            // stationsTable
             // 
-            tableLayoutPanel1.AutoScroll = true;
-            tableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Location = new Point(274, 33);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Size = new Size(523, 414);
-            tableLayoutPanel1.TabIndex = 1;
+            stationsTable.AutoScroll = true;
+            stationsTable.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            stationsTable.ColumnCount = 1;
+            stationsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            stationsTable.Location = new Point(274, 33);
+            stationsTable.Name = "stationsTable";
+            stationsTable.Size = new Size(523, 414);
+            stationsTable.TabIndex = 1;
             // 
-            // panel2
+            // navPanel
             // 
-            panel2.Anchor = AnchorStyles.None;
-            panel2.BackColor = SystemColors.AppWorkspace;
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(button3);
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(800, 30);
-            panel2.TabIndex = 0;
+            navPanel.Anchor = AnchorStyles.None;
+            navPanel.BackColor = SystemColors.AppWorkspace;
+            navPanel.Controls.Add(button4);
+            navPanel.Controls.Add(button1);
+            navPanel.Controls.Add(button3);
+            navPanel.Location = new Point(0, 0);
+            navPanel.Name = "navPanel";
+            navPanel.Size = new Size(800, 30);
+            navPanel.TabIndex = 0;
             // 
             // button4
             // 
@@ -207,6 +213,11 @@ namespace BusManager.Presentation.Views
             label1.TabIndex = 0;
             label1.Text = "label1";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
             // StationManager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -217,26 +228,28 @@ namespace BusManager.Presentation.Views
             Text = "StationManager";
             Panel.ResumeLayout(false);
             Panel.PerformLayout();
-            panel2.ResumeLayout(false);
+            navPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel Panel;
-        private Panel panel2;
+        private Panel navPanel;
         private Button button1;
         private Button button3;
         private Button button4;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel stationsTable;
         private Label label1;
         private Label createStationLabel;
-        private ComboBox comboBox1;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Button button2;
-        private Label label4;
-        private Label label3;
-        private Label label2;
+        private ComboBox stationCityList;
+        private TextBox stationAddressField;
+        private TextBox stationNameField;
+        private Button addStationButton;
+        private Label stationCityLabel;
+        private Label stationAddressLabel;
+        private Label stationNameLabel;
+        private ErrorProvider errorProvider1;
     }
 }

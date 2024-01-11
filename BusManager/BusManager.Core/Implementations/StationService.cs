@@ -33,5 +33,15 @@ namespace BusManager.Core.Implementations
         {
             return await _stationRepository.GetAllStations();
         }
+        public async Task<bool> CreateStation(string name, string address, int cityId)
+        {
+            Station station = new()
+            {
+                Name = name,
+                Address = address,
+                CityId = cityId
+            };
+            return await _stationRepository.CreateStation(station);
+        }
     }
 }
