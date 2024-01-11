@@ -23,6 +23,10 @@ namespace BusManager.Presentation
 
         private async void LoginButton_Click(object sender, EventArgs e)
         {
+            // temp
+            WindowManager windowManager = WindowManager.Instance;
+            windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+            // temp
             string email = EmailField.Text;
             string password = PasswordField.Text;
             var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
