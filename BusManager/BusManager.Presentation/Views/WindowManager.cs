@@ -21,6 +21,7 @@ namespace BusManager.Presentation.Views
 
         private readonly LoginWindow loginWindow = new();
         private readonly RegisterWindow registerWindow = new();
+        private readonly StationManager stationManager = new();
 
         public ServiceProvider serviceProvider = new ServiceCollection()
             .AddDbContext<BusManagerDbContext>()
@@ -28,12 +29,16 @@ namespace BusManager.Presentation.Views
             .AddSingleton<UserTypeRepository>()
             .AddSingleton<CityRepository>()
             .AddSingleton<IUserService, UserService>()
+            .AddSingleton<IStationService, StationService>()
             .BuildServiceProvider();
 
         private WindowManager()
         {
             
             InitializeComponent();
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             LoadScene(SCENES.LOGIN);
         }
 
@@ -49,7 +54,8 @@ namespace BusManager.Presentation.Views
         public enum SCENES
         {
             LOGIN,
-            REGISTER
+            REGISTER,
+            STATION_MANAGER
         }
 
         public void LoadScene(SCENES scene)
@@ -62,6 +68,9 @@ namespace BusManager.Presentation.Views
                     break;
                 case SCENES.REGISTER:
                     this.Controls.Add(registerWindow.GetPanel());
+                    break;
+                case SCENES.STATION_MANAGER:
+                    this.Controls.Add(stationManager.GetPanel());
                     break;
             }
         }
