@@ -17,9 +17,9 @@ namespace BusManager.Data.Data.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<City>> GetAllCitiesAsync()
+        public async Task<List<City>> GetAllCities()
         {
-            return await _context.Cities.ToListAsync();
+            return await _dbContext.Cities.ToListAsync();
         }
     }
 }
