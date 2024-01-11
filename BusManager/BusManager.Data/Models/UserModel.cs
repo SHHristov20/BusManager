@@ -26,5 +26,7 @@ namespace BusManager.Data.Models
         [Required]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; } = null!;
+
+        public ICollection<Ticket> Tickets { get; set; } = null!;
     }
 }

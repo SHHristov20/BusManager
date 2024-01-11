@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace BusManager.Data.Models
 {
-    public class UserType
+    public class Ticket
     {
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
-        public ICollection<User> Users { get; set; } = null!;
+        public int BuyerId { get; set; }
+        public User Buyer { get; set; } = null!;
+
+        public int ScheduleId { get; set; }
+        public Schedule Schedule { get; set; } = null!;
+
     }
 }

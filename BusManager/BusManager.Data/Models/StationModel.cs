@@ -20,5 +20,7 @@ namespace BusManager.Data.Models
         [Required]
         public int CityId { get; set; }
         public City City { get; set; } = null!;
+        public ICollection<Schedule> SchedulesFrom { get; set; } = null!;
+        public ICollection<Schedule> SchedulesTo { get; set; } = null!;
     }
 }

@@ -14,7 +14,6 @@ namespace BusManager.Data.Models
         [Required]
         public string Name { get; set; } = null!;
 
-        [Required]
         public ICollection<Station> Stations { get; set; } = null!;
 
     }
