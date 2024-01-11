@@ -9,6 +9,7 @@ using BusManager.Core.Interfaces;
 using BusManager.Core.Validators;
 using BusManager.Data.Data.Repositories;
 using BusManager.Data.Models;
+using Microsoft.IdentityModel.Tokens;
 using static BusManager.Core.Validators.UserValidator;
 
 namespace BusManager.Core.Implementations
@@ -20,12 +21,12 @@ namespace BusManager.Core.Implementations
         {
             _userRepository = userRepository;
         }
-        public async Task<bool> Login(string email, string password) 
+        public async Task<User> Login(string email, string password) 
         {
-            if(email == "" || password == "") { throw new Exception("Please fill all fields"); }
-            var user = await _userRepository.FindUserByEmail(email) ?? throw new Exception("User does not exist");
+            if(string.IsNullOrEmpty(email)|| string.IsNullOrEmpty(password)) { throw new Exception("Please fill all fields"); }
+            User user = await _userRepository.FindUserByEmail(email) ?? throw new Exception("User does not exist");
             if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new Exception("Invalid password");
-            return true;
+            return user;
         }
         public async Task<bool> Register(string fName, string lName, string email, string password, string repeatPassword) 
         {
@@ -35,7 +36,7 @@ namespace BusManager.Core.Implementations
             if(!ValidateEmail(email)) { exceptions.Add(new ArgumentException("Invalid email address")); }
             if(!ValidatePassword(password)) { exceptions.Add(new ArgumentException("Password must contain at least 8 characters")); }
             if(!PasswordsMatch(password, repeatPassword)) { exceptions.Add(new ArgumentException("Passwords must match")); }
-            if(await _userRepository.FindUserByEmail(email) != null) { exceptions.Add(new ArgumentException("Email already in use")); }
+            if(!await IsEmailAvailable(email)) { exceptions.Add(new ArgumentException("Email already in use")); }
             if (exceptions.Any()) { throw new AggregateException("Error", exceptions); }
             string passwordHash = PasswordValidator.HashPassword(password);
             User user = new()
@@ -50,7 +51,9 @@ namespace BusManager.Core.Implementations
             return await _userRepository.CreateUser(user);
 
         }
-        public bool IsEmailAvailable(string email) { return false; }
-        public bool PasswordValid(string password) { return false; }
+        public async Task<bool> IsEmailAvailable(string email) 
+        {
+            return await _userRepository.FindUserByEmail(email.ToLower()) == null;
+        }
     }
 }

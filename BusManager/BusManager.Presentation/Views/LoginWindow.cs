@@ -1,4 +1,5 @@
 using BusManager.Core.Interfaces;
+using BusManager.Data.Models;
 using BusManager.Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,14 +26,21 @@ namespace BusManager.Presentation
         {
             // temp
             WindowManager windowManager = WindowManager.Instance;
-            windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+            //windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
             // temp
             string email = EmailField.Text;
             string password = PasswordField.Text;
             var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
             try
             {
-                bool logged = await userService.Login(email, password);
+                //bool logged = await userService.Login(email, password);
+                User user = await userService.Login(email, password) ?? throw new Exception("Something went wrong!");
+                windowManager.LoggedUser = user;
+                if(user.UserTypeId == 5) 
+                {
+                    windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+                }
+
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 using BusManager.Core.Interfaces;
 using BusManager.Data.Data.Contexts;
 using BusManager.Data.Data.Repositories;
+using BusManager.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace BusManager.Presentation.Views
     public partial class WindowManager : Form
     {
         private static WindowManager instance = null!;
+        public User LoggedUser { get; set; } = null!;
 
         private readonly LoginWindow loginWindow = new();
         private readonly RegisterWindow registerWindow = new();

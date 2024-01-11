@@ -40,14 +40,12 @@ namespace BusManager.Presentation.Views
             string password = PasswordField.Text;
             string repeatPassword = RepeatPasswordField.Text;
             //UserService userService = new();
-            var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
+            WindowManager windowManager = WindowManager.Instance;
+            var userService = windowManager.serviceProvider.GetService<IUserService>();
             try
             {
                 bool registered = await userService.Register(fName, lName, email, password, repeatPassword);
-                if(registered)
-                {
-                    MessageBox.Show("Sucess");
-                }
+                if(registered) windowManager.LoadScene(WindowManager.SCENES.LOGIN);
 
             }
             catch (AggregateException errors)

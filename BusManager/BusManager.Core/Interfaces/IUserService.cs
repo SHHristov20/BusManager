@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusManager.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,8 @@ namespace BusManager.Core.Interfaces
 {
     public interface IUserService
     {
-        Task<bool> Login(string email, string password);
+        Task<User> Login(string email, string password);
         Task<bool> Register(string fName, string lName, string email, string password, string repeatPassword);
-        bool IsEmailAvailable(string email);
-        bool PasswordValid(string password);
+        Task<bool> IsEmailAvailable(string email);
     }
 }
