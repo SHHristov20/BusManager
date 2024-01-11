@@ -14,7 +14,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusManager.Presentation.Views
 {
@@ -58,10 +57,11 @@ namespace BusManager.Presentation.Views
             for (int i = 0; i < stations.Count; i++)
             {
                 Panel panel = new Panel();
-                panel.Width = 400;
+                panel.Width = 500;
                 panel.Height = 50;
                 Label stationName = new Label();
                 Label stationInfo = new Label();
+                Button deleteStation = new Button();
                 stationName.Text = $"{stations[i].Name}";
                 stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
                 stationName.AutoSize = true;
@@ -69,8 +69,14 @@ namespace BusManager.Presentation.Views
                 stationInfo.Text = $"City: {stations[i].City.Name}   Address: {stations[i].Address}";
                 stationInfo.Location = new Point(0, 20);
                 stationInfo.AutoSize = true;
+                deleteStation.Text = "Delete station";
+                deleteStation.AutoSize = true;
+                deleteStation.Location = new Point(370, panel.Height/2 - deleteStation.Height/2);
+                int stationIndex = i;
+                deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, stations[stationIndex], panel);
                 panel.Controls.Add(stationName);
                 panel.Controls.Add(stationInfo);
+                panel.Controls.Add(deleteStation);
                 this.stationsTable.Controls.Add(panel, 0, i);
             }
             stationsTable.PerformLayout();
@@ -81,10 +87,11 @@ namespace BusManager.Presentation.Views
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             Station station = await stationService.GetLastAddedStation();
             Panel panel = new Panel();
-            panel.Width = 400;
+            panel.Width = 500;
             panel.Height = 50;
             Label stationName = new Label();
             Label stationInfo = new Label();
+            Button deleteStation = new Button();
             stationName.Text = $"{station.Name}";
             stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
             stationName.AutoSize = true;
@@ -92,9 +99,25 @@ namespace BusManager.Presentation.Views
             stationInfo.Text = $"City: {station.City.Name}   Address: {station.Address}";
             stationInfo.Location = new Point(0, 20);
             stationInfo.AutoSize = true;
+            deleteStation.Text = "Delete station";
+            deleteStation.AutoSize = true;
+            deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
+            deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, station, panel);
             panel.Controls.Add(stationName);
             panel.Controls.Add(stationInfo);
+            panel.Controls.Add(deleteStation);
             this.stationsTable.Controls.Add(panel);
+        }
+        private async void DeleteStationButton_Click(object? sender, EventArgs e, Station station, Panel panel)
+        {
+            var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
+            bool success = await stationService.DeleteStation(station);
+            if (success)
+            {
+                panel.Controls.Clear();
+                panel.Dispose();
+            }
+            else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private async void AddStationButton_Click(object sender, EventArgs e)
         {
@@ -107,11 +130,10 @@ namespace BusManager.Presentation.Views
             if (string.IsNullOrEmpty(errorProvider1.GetError(stationNameField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationAddressField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationCityList)))
             {
                 var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
-                bool success = await stationService.CreateStation(this.stationNameField.Text, this.stationAddressField.Text, this.stationCityList.SelectedIndex);
+                bool success = await stationService.CreateStation(this.stationNameField.Text, this.stationAddressField.Text, this.stationCityList.Text);
                 AddStationToTable();
-                if (success) MessageBox.Show("Success");
-                else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Debug.WriteLine(stationCityList.SelectedIndex);
+                if (!success) MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }

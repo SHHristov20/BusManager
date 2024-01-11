@@ -37,19 +37,24 @@ namespace BusManager.Core.Implementations
         {
             return await _stationRepository.GetLastAddedStation();
         }
-        public async Task<bool> CreateStation(string name, string address, int cityId)
+        public async Task<bool> CreateStation(string name, string address, string city)
         {
+            City cityObj = await GetCityByName(city);
             Station station = new()
             {
                 Name = name,
                 Address = address,
-                CityId = cityId
+                City = cityObj
             };
             return await _stationRepository.CreateStation(station);
         }
-        public async Task<City> GetCityIdByName(string name)
+        public async Task<City> GetCityByName(string name)
         {
-            return await _cityRepository.GetCityIdByName(name);
+            return await _cityRepository.GetCityByName(name);
+        }
+        public async Task<bool> DeleteStation(Station station)
+        {
+            return await _stationRepository.DeleteStation(station);
         }
 
     }

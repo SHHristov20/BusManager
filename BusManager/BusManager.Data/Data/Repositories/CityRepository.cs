@@ -21,7 +21,7 @@ namespace BusManager.Data.Data.Repositories
         {
             return await _dbContext.Cities.ToListAsync();
         }
-        public async Task<City> GetCityIdByName(string name)
+        public async Task<City> GetCityByName(string name)
         {
             return await _dbContext.Cities
                 .Where(c => c.Name == name)

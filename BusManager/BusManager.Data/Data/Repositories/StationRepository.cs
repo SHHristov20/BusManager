@@ -39,5 +39,18 @@ namespace BusManager.Data.Data.Repositories
                 return false;
             }
         }
+        public async Task<bool> DeleteStation(Station station)
+        {
+            try
+            {
+                _dbContext.Stations.Remove(station);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

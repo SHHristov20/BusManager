@@ -11,8 +11,9 @@ namespace BusManager.Core.Interfaces
     {
         Task<List<String>> GetAllCitiesStrings();
         Task<List<Station>> GetAllStationsList();
-        Task<bool> CreateStation(string name, string address, int cityId);
+        Task<bool> CreateStation(string name, string address, string city);
         Task<Station?> GetLastAddedStation();
-        Task<City> GetCityIdByName(string name);
+        Task<City> GetCityByName(string name);
+        Task<bool> DeleteStation(Station station);
     }
 }
