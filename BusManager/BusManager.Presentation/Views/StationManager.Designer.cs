@@ -81,7 +81,7 @@ namespace BusManager.Presentation.Views
             addStationButton.TabIndex = 9;
             addStationButton.Text = "Add station";
             addStationButton.UseVisualStyleBackColor = true;
-            addStationButton.Click += addStationButton_Click;
+            addStationButton.Click += AddStationButton_Click;
             // 
             // stationCityLabel
             // 
@@ -158,8 +158,10 @@ namespace BusManager.Presentation.Views
             stationsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             stationsTable.Location = new Point(274, 33);
             stationsTable.Name = "stationsTable";
-            stationsTable.Size = new Size(523, 414);
+            stationsTable.Size = new Size(530, 414);
             stationsTable.TabIndex = 1;
+            int vertScrollWidth = SystemInformation.VerticalScrollBarWidth;
+            stationsTable.Padding = new Padding(0, 0, vertScrollWidth, 0);
             // 
             // navPanel
             // 

@@ -20,6 +20,12 @@ namespace BusManager.Data.Data.Repositories
         {
             return await _dbContext.Stations.ToListAsync();
         }
+        public async Task<Station?> GetLastAddedStation()
+        {
+            return await _dbContext.Stations
+                .OrderByDescending(e => e.Id)
+                .FirstOrDefaultAsync();
+        }
         public async Task<bool> CreateStation(Station station)
         {
             try

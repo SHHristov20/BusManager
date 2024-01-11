@@ -1,4 +1,6 @@
 ﻿using BusManager.Core.Interfaces;
+using BusManager.Data.Migrations;
+using BusManager.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -21,34 +23,80 @@ namespace BusManager.Presentation.Views
         public StationManager()
         {
             InitializeComponent();
+
         }
         public Panel GetPanel()
         {
-            this.PopulateTable();
+            this.PopulateCitiesList();
             return this.Panel;
         }
 
-        private async void PopulateTable(/*object sender, PaintEventArgs e*/)
+        private async void PopulateCitiesList(/*object sender, PaintEventArgs e*/)
         {
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             List<string> cities = await stationService.GetAllCitiesStrings();
-            //List<String> cities = new List<string> { "Burgas", "asd", "asdasd", "asdasdasdsa" };
-            Debug.WriteLine("asdad");
             stationCityList.Items.AddRange([.. cities]);
+            this.LoadStationsTable();
+
             for (int i = 0; i < cities.Count; i++)
             {
                 //Debug.WriteLine(cities[i]);
-                //Label cityLabel = new Label();
-                //cityLabel.Text = cities[i];
-                //cityLabel.Anchor = AnchorStyles.None;
+                //Label stationName = new Label();
+                //stationName.Text = cities[i];
+                //stationName.Anchor = AnchorStyles.None;
                 //this.stationsTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
-                //this.stationsTable.Controls.Add(cityLabel, 0, i);
+                //this.stationsTable.Controls.Add(stationName, 0, i);
                 //stationCityList.Items.Add(cities[i]);
             }
 
         }
+        private async void LoadStationsTable()
+        {
+            //stationsTable.RowStyles[0].;
+            var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
+            List<Station> stations = await stationService.GetAllStationsList();
+            for (int i = 0; i < stations.Count; i++)
+            {
+                Panel panel = new Panel();
+                panel.Width = 400;
+                panel.Height = 50;
+                Label stationName = new Label();
+                Label stationInfo = new Label();
+                stationName.Text = $"{stations[i].Name}";
+                stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                stationName.AutoSize = true;
+                stationName.Anchor = AnchorStyles.Left;
+                stationInfo.Text = $"City: {stations[i].City.Name}   Address: {stations[i].Address}";
+                stationInfo.Location = new Point(0, 20);
+                stationInfo.AutoSize = true;
+                panel.Controls.Add(stationName);
+                panel.Controls.Add(stationInfo);
+                this.stationsTable.Controls.Add(panel, 0, i);
+            }
+            stationsTable.PerformLayout();
+        }
 
-        private async void addStationButton_Click(object sender, EventArgs e)
+        private async void AddStationToTable()
+        {
+            var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
+            Station station = await stationService.GetLastAddedStation();
+            Panel panel = new Panel();
+            panel.Width = 400;
+            panel.Height = 50;
+            Label stationName = new Label();
+            Label stationInfo = new Label();
+            stationName.Text = $"{station.Name}";
+            stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+            stationName.AutoSize = true;
+            stationName.Anchor = AnchorStyles.Left;
+            stationInfo.Text = $"City: {station.City.Name}   Address: {station.Address}";
+            stationInfo.Location = new Point(0, 20);
+            stationInfo.AutoSize = true;
+            panel.Controls.Add(stationName);
+            panel.Controls.Add(stationInfo);
+            this.stationsTable.Controls.Add(panel);
+        }
+        private async void AddStationButton_Click(object sender, EventArgs e)
         {
             if (this.stationNameField.Text.Length <= 0) this.errorProvider1.SetError(this.stationNameField, "Name is required.");
             else this.errorProvider1.SetError(this.stationNameField, string.Empty);
@@ -60,6 +108,7 @@ namespace BusManager.Presentation.Views
             {
                 var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
                 bool success = await stationService.CreateStation(this.stationNameField.Text, this.stationAddressField.Text, this.stationCityList.SelectedIndex);
+                AddStationToTable();
                 if (success) MessageBox.Show("Success");
                 else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine(stationCityList.SelectedIndex);
