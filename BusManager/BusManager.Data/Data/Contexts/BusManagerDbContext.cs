@@ -14,6 +14,8 @@ namespace BusManager.Data.Data.Contexts
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Station> Stations { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         public BusManagerDbContext() { }
         public BusManagerDbContext(DbContextOptions<BusManagerDbContext> options) : base(options)
@@ -36,6 +38,23 @@ namespace BusManager.Data.Data.Contexts
                 .Property(x => x.Id)
                 .UseIdentityColumn();
 
+            modelBuilder.Entity<City>()
+                .Property(x => x.Id)
+                .UseIdentityColumn();
+
+            modelBuilder.Entity<Station>()
+                .Property(x => x.Id)
+                .UseIdentityColumn();
+
+            modelBuilder.Entity<Schedule>()
+                .Property(x => x.Id)
+                .UseIdentityColumn();
+
+            modelBuilder.Entity<Ticket>()
+                .Property(x => x.Id)
+                .UseIdentityColumn();
+
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserType)        // User has one UserType
                 .WithMany(ut => ut.Users)       // UserType has many Users
@@ -52,6 +71,32 @@ namespace BusManager.Data.Data.Contexts
                 .HasForeignKey(s => s.CityId)
                 .IsRequired();
 
+            modelBuilder.Entity<Schedule>()
+                .HasOne(s => s.FromStation)
+                .WithMany(fs => fs.SchedulesFrom)
+                .HasForeignKey(s => s.FromStationId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Schedule>()
+                .HasOne(s => s.ToStation)
+                .WithMany(ts => ts.SchedulesTo)
+                .HasForeignKey(s => s.ToStationId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Buyer)
+                .WithMany(b => b.Tickets)
+                .HasForeignKey(b => b.BuyerId)
+                .IsRequired();
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Schedule) 
+                .WithMany(s => s.Tickets)
+                .HasForeignKey(s => s.ScheduleId)
+                .IsRequired();
+
             SeedUserTypes(modelBuilder);
             SeedCities(modelBuilder);
         }
@@ -60,10 +105,8 @@ namespace BusManager.Data.Data.Contexts
         {
             modelBuilder.Entity<UserType>().HasData(
                 new() { Id = 1, Name = "User" },
-                new() { Id = 2, Name = "Driver" },
-                new() { Id = 3, Name = "Staff" },
-                new() { Id = 4, Name = "Manager" },
-                new() { Id = 5, Name = "Admin" }
+                new() { Id = 2, Name = "Staff" },
+                new() { Id = 3, Name = "Admin" }
             );
         }
 
