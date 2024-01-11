@@ -47,6 +47,10 @@ namespace BusManager.Core.Implementations
             };
             return await _stationRepository.CreateStation(station);
         }
+        public async Task<City> GetCityIdByName(string name)
+        {
+            return await _cityRepository.GetCityIdByName(name);
+        }
 
     }
 }
