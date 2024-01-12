@@ -61,10 +61,6 @@ namespace BusManager.Data.Data.Contexts
                 .HasForeignKey(u => u.UserTypeId) // Foreign key property in User entity
                 .IsRequired();
 
-            modelBuilder.Entity<City>()
-                .Property(x => x.Id)
-                .UseIdentityColumn();
-
             modelBuilder.Entity<Station>()
                 .HasOne(s => s.City)
                 .WithMany(c => c.Stations)

@@ -41,7 +41,6 @@ namespace BusManager.Presentation.Views
         }
         private async void LoadStationsTable()
         {
-            //stationsTable.RowStyles[0].;
             stationsTable.Controls.Clear();
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             List<Station> stations = await stationService.GetAllStationsList();
@@ -112,20 +111,18 @@ namespace BusManager.Presentation.Views
         }
         private async void AddStationButton_Click(object sender, EventArgs e)
         {
-            if (this.stationNameField.Text.Length <= 0) this.errorProvider1.SetError(this.stationNameField, "Name is required.");
-            else this.errorProvider1.SetError(this.stationNameField, string.Empty);
-            if (this.stationAddressField.Text.Length <= 0) this.errorProvider1.SetError(this.stationAddressField, "Address is required.");
-            else this.errorProvider1.SetError(this.stationAddressField, string.Empty);
-            if (this.stationCityList.SelectedIndex == -1) this.errorProvider1.SetError(this.stationCityList, "City is required.");
-            else this.errorProvider1.SetError(this.stationCityList, string.Empty);
-            if (string.IsNullOrEmpty(errorProvider1.GetError(stationNameField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationAddressField)) && string.IsNullOrEmpty(errorProvider1.GetError(stationCityList)))
+            if (this.stationNameField.Text.Length <= 0) this.fieldsErrorProvider.SetError(this.stationNameField, "Name is required!");
+            else this.fieldsErrorProvider.SetError(this.stationNameField, string.Empty);
+            if (this.stationAddressField.Text.Length <= 0) this.fieldsErrorProvider.SetError(this.stationAddressField, "Address is required!");
+            else this.fieldsErrorProvider.SetError(this.stationAddressField, string.Empty);
+            if (this.stationCityList.SelectedIndex == -1) this.fieldsErrorProvider.SetError(this.stationCityList, "City is required!");
+            else this.fieldsErrorProvider.SetError(this.stationCityList, string.Empty);
+            if (string.IsNullOrEmpty(fieldsErrorProvider.GetError(stationNameField)) && string.IsNullOrEmpty(fieldsErrorProvider.GetError(stationAddressField)) && string.IsNullOrEmpty(fieldsErrorProvider.GetError(stationCityList)))
             {
                 var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
                 bool success = await stationService.CreateStation(this.stationNameField.Text, this.stationAddressField.Text, this.stationCityList.Text);
                 AddStationToTable();
                 if (!success) MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
@@ -134,6 +131,11 @@ namespace BusManager.Presentation.Views
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoggedUser = null;
             windowManager.LoadScene(WindowManager.SCENES.LOGIN);
+        }
+
+        private void manageSchedulesButton_Click(object sender, EventArgs e)
+        {
+            WindowManager.Instance.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);
         }
     }
 }

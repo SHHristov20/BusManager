@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace BusManager.Data.Data.Repositories
 {
@@ -18,7 +19,9 @@ namespace BusManager.Data.Data.Repositories
         }
         public async Task<List<Station>> GetAllStations()
         {
-            return await _dbContext.Stations.ToListAsync();
+            return await _dbContext.Stations
+                .Include(s => s.City)
+                .ToListAsync();
         }
         public async Task<Station?> GetLastAddedStation()
         {
@@ -51,6 +54,12 @@ namespace BusManager.Data.Data.Repositories
             {
                 return false;
             }
+        }
+        public async Task<Station?> GetStationById(int id)
+        {
+            return await _dbContext.Stations
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }

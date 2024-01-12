@@ -45,15 +45,14 @@ namespace BusManager.Presentation.Views
             createStationLabel = new Label();
             stationsTable = new TableLayoutPanel();
             navPanel = new Panel();
-            button4 = new Button();
-            button1 = new Button();
-            button3 = new Button();
-            label1 = new Label();
-            errorProvider1 = new ErrorProvider(components);
             logoutButton = new Button();
+            manageStationsButton = new Button();
+            manageSchedulesButton = new Button();
+            manageAccountsButton = new Button();
+            fieldsErrorProvider = new ErrorProvider(components);
             Panel.SuspendLayout();
             navPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // Panel
@@ -133,7 +132,7 @@ namespace BusManager.Presentation.Views
             // 
             // stationNameField
             // 
-            errorProvider1.SetIconPadding(stationNameField, 2);
+            fieldsErrorProvider.SetIconPadding(stationNameField, 2);
             stationNameField.Location = new Point(12, 110);
             stationNameField.Name = "stationNameField";
             stationNameField.Size = new Size(200, 23);
@@ -168,58 +167,13 @@ namespace BusManager.Presentation.Views
             navPanel.Anchor = AnchorStyles.None;
             navPanel.BackColor = SystemColors.AppWorkspace;
             navPanel.Controls.Add(logoutButton);
-            navPanel.Controls.Add(button4);
-            navPanel.Controls.Add(button1);
-            navPanel.Controls.Add(button3);
+            navPanel.Controls.Add(manageStationsButton);
+            navPanel.Controls.Add(manageSchedulesButton);
+            navPanel.Controls.Add(manageAccountsButton);
             navPanel.Location = new Point(0, 0);
             navPanel.Name = "navPanel";
             navPanel.Size = new Size(800, 30);
             navPanel.TabIndex = 0;
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.None;
-            button4.BackColor = SystemColors.Control;
-            button4.Location = new Point(143, 2);
-            button4.Name = "button4";
-            button4.Size = new Size(125, 25);
-            button4.TabIndex = 4;
-            button4.Text = "Manage Stations";
-            button4.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Location = new Point(12, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(125, 25);
-            button1.TabIndex = 3;
-            button1.Text = "Manage Schedules";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(274, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 25);
-            button3.TabIndex = 2;
-            button3.Text = "Manage Accounts";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 380);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
-            // 
-            // errorProvider1
-            // 
-            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
-            errorProvider1.ContainerControl = this;
             // 
             // logoutButton
             // 
@@ -230,6 +184,43 @@ namespace BusManager.Presentation.Views
             logoutButton.Text = "Logout";
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += logoutButton_Click;
+            // 
+            // manageStationsButton
+            // 
+            manageStationsButton.Anchor = AnchorStyles.None;
+            manageStationsButton.BackColor = SystemColors.Control;
+            manageStationsButton.Location = new Point(143, 2);
+            manageStationsButton.Name = "manageStationsButton";
+            manageStationsButton.Size = new Size(125, 25);
+            manageStationsButton.TabIndex = 4;
+            manageStationsButton.Text = "Manage Stations";
+            manageStationsButton.UseVisualStyleBackColor = false;
+            // 
+            // manageSchedulesButton
+            // 
+            manageSchedulesButton.Anchor = AnchorStyles.None;
+            manageSchedulesButton.Location = new Point(12, 2);
+            manageSchedulesButton.Name = "manageSchedulesButton";
+            manageSchedulesButton.Size = new Size(125, 25);
+            manageSchedulesButton.TabIndex = 3;
+            manageSchedulesButton.Text = "Manage Schedules";
+            manageSchedulesButton.UseVisualStyleBackColor = true;
+            manageSchedulesButton.Click += manageSchedulesButton_Click;
+            // 
+            // manageAccountsButton
+            // 
+            manageAccountsButton.Anchor = AnchorStyles.None;
+            manageAccountsButton.Location = new Point(274, 2);
+            manageAccountsButton.Name = "manageAccountsButton";
+            manageAccountsButton.Size = new Size(125, 25);
+            manageAccountsButton.TabIndex = 2;
+            manageAccountsButton.Text = "Manage Accounts";
+            manageAccountsButton.UseVisualStyleBackColor = true;
+            // 
+            // fieldsErrorProvider
+            // 
+            fieldsErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            fieldsErrorProvider.ContainerControl = this;
             // 
             // StationManager
             // 
@@ -242,7 +233,7 @@ namespace BusManager.Presentation.Views
             Panel.ResumeLayout(false);
             Panel.PerformLayout();
             navPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).EndInit();
             ResumeLayout(false);
         }
 
@@ -250,11 +241,10 @@ namespace BusManager.Presentation.Views
 
         private Panel Panel;
         private Panel navPanel;
-        private Button button1;
-        private Button button3;
-        private Button button4;
+        private Button manageSchedulesButton;
+        private Button manageAccountsButton;
+        private Button manageStationsButton;
         private TableLayoutPanel stationsTable;
-        private Label label1;
         private Label createStationLabel;
         private ComboBox stationCityList;
         private TextBox stationAddressField;
@@ -263,7 +253,7 @@ namespace BusManager.Presentation.Views
         private Label stationCityLabel;
         private Label stationAddressLabel;
         private Label stationNameLabel;
-        private ErrorProvider errorProvider1;
+        private ErrorProvider fieldsErrorProvider;
         private Button logoutButton;
     }
 }
