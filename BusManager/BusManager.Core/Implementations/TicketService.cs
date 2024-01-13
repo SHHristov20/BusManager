@@ -24,7 +24,7 @@ namespace BusManager.Core.Implementations
             QRCodeGenerator qrCodeGenerator = new();
             QRCodeData qrCodeData = qrCodeGenerator.CreateQrCode(ticket.Code, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(10);
+            Bitmap qrCodeImage = qrCode.GetGraphic(9);
             return qrCodeImage;
         }
         public async Task<Ticket?> BuyTicket(Schedule schedule, User user)

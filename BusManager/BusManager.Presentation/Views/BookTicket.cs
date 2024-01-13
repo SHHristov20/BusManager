@@ -2,16 +2,19 @@
 using BusManager.Data.Models;
 using BusManager.Presentation.Properties;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace BusManager.Presentation.Views
 {
@@ -88,22 +91,38 @@ namespace BusManager.Presentation.Views
 
         private async void buyButton_Click(Schedule schedule)
         {
-            var ticketService = WindowManager.Instance.serviceProvider.GetService<ITicketService>();
-            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
-            PrintDialog printDialog = new PrintDialog();
-            PrintDocument printDocument = new PrintDocument();
-            Bitmap qr = ticketService.GenerateQrCodeForTicket();
-            printDocument.PrintPage += (sender, e) => this.pd_PrintPage(sender, e, qr, schedule);
-            printPreviewDialog.Document = printDocument;
-            printPreviewDialog.ShowDialog();
+            WindowManager windowManager = WindowManager.Instance;
+            var ticketService = windowManager.serviceProvider.GetService<ITicketService>();
+            PrintPreviewDialog printPreview = new();
+            PrintDocument printDocument = new();
+            Ticket ticket = await ticketService.BuyTicket(schedule, windowManager.LoggedUser);
+            if (ticket !=  null)
+            {
+                Bitmap qr = ticketService.GenerateQrCodeForTicket(ticket);
+                printDocument.PrintPage += (sender, e) => this.GenerateTicket(sender, e, qr, ticket);
+                printDocument.DocumentName = $"Ticket - {ticket.Code}";
+                printPreview.Document = printDocument;
+                printPreview.ShowDialog();
+            }
+            else MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void pd_PrintPage(object sender, PrintPageEventArgs ev, Bitmap qr, Schedule schedule)
+        private void GenerateTicket(object sender, PrintPageEventArgs e, Bitmap qr, Ticket ticket)
         {
             Image logo = Properties.Resources.Logo;
-            ev.Graphics.DrawImage(logo, logo.Width/2, 0);
-            //draw rectangle centered
-            ev.Graphics.DrawRectangle(new Pen(Color.Black, 2), (ev.PageBounds.Width - 700) / 2, logo.Height, 700, 300);
-            // draw string
+            Font font = new ("Times New Roman", 16);
+            Font fontBold = new Font(font, FontStyle.Bold);
+            SolidBrush brush = new (Color.Black);
+            float x = (e.PageBounds.Width - 700) / 2;
+            float y = logo.Height;
+            e.Graphics.DrawImage(logo, logo.Width/2, 0);
+            e.Graphics.DrawRectangle(new Pen(Color.Black, 2), (e.PageBounds.Width - 700) / 2, logo.Height, 700, 300);
+            e.Graphics.DrawString($"Ticket - {ticket.Code}", fontBold, brush, new PointF(x, y + 5));
+            e.Graphics.DrawString($"{WindowManager.Instance.LoggedUser.FirstName} {WindowManager.Instance.LoggedUser.LastName}", fontBold, brush, new PointF(x, y + 50));
+            e.Graphics.DrawString($"{WindowManager.Instance.LoggedUser.Email}", font, brush, new PointF(x, y + 75));
+            e.Graphics.DrawString($"{ticket.Schedule.FromStation.City.Name} - {ticket.Schedule.ToStation.City.Name}", fontBold, brush, new PointF(x, y + 131));
+            e.Graphics.DrawString($"{ticket.Schedule.FromStation.Name} - {ticket.Schedule.ToStation.Name}", font, brush, new PointF(x, y + 156));
+            e.Graphics.DrawString($"Leaves {ticket.Schedule.Time:dd/MM/yyyy} at {ticket.Schedule.Time:HH:mm}", font, brush, new PointF(x, y + 181));
+            e.Graphics.DrawImage(qr, e.PageBounds.Width - qr.Width - 100, logo.Height + (300 - qr.Height) / 2);
         }
 
         private void searchButton_Click(object sender, EventArgs e)

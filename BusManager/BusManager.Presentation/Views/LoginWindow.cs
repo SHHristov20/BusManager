@@ -27,26 +27,27 @@ namespace BusManager.Presentation
         {
             // temp
             WindowManager windowManager = WindowManager.Instance;
-            windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
+            //windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
             // temp
-            //string email = EmailField.Text;
-            //string password = PasswordField.Text;
-            //var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
-            //try
-            //{
-            //    //bool logged = await userService.Login(email, password);
-            //    User user = await userService.Login(email, password) ?? throw new Exception("Something went wrong!");
-            //    windowManager.LoggedUser = user;
-            //    if(user.UserTypeId == 3) 
-            //    {
-            //        windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
-            //    }
+            string email = EmailField.Text;
+            string password = PasswordField.Text;
+            var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
+            try
+            {
+                //bool logged = await userService.Login(email, password);
+                User user = await userService.Login(email, password) ?? throw new Exception("Something went wrong!");
+                windowManager.LoggedUser = user;
+                if (user.UserTypeId == 3)
+                {
+                    windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+                }
+                else windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
