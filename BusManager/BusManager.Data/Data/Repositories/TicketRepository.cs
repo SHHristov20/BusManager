@@ -1,4 +1,5 @@
 ﻿using BusManager.Data.Data.Contexts;
+using BusManager.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,19 @@ namespace BusManager.Data.Data.Repositories
         public TicketRepository(BusManagerDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+        public async Task<Ticket?> CreateTicket(Ticket ticket)
+        {
+            try
+            {
+                await _dbContext.Tickets.AddAsync(ticket);
+                await _dbContext.SaveChangesAsync();
+                return ticket;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

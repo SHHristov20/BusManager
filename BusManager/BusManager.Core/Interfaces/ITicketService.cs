@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusManager.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BusManager.Core.Interfaces
 {
     public interface ITicketService
     {
-        Bitmap GenerateQrCodeForTicket(/*Ticket ticket*/);
+        Bitmap GenerateQrCodeForTicket(Ticket ticket);
+        Task<Ticket?> BuyTicket(Schedule schedule, User user);
     }
 }
