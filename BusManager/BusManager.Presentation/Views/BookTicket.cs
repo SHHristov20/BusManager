@@ -37,14 +37,14 @@ namespace BusManager.Presentation.Views
             List<string> cities = await stationService.GetAllCitiesStrings();
             fromList.Items.AddRange([.. cities]);
             toList.Items.AddRange([.. cities]);
-            LoadSchedulesForToday();
+            var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
+            List<Schedule> schedules = await scheduleService.GetSchedulesForToday();
+            LoadSchedules(schedules);
         }
-        private async void LoadSchedulesForToday()
+        private void LoadSchedules(List<Schedule> schedules)
         {
             schedulesTable.Controls.Clear();
             foreach (Control c in schedulesTable.Controls) c.Dispose();
-            var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
-            List<Schedule> schedules = await scheduleService.GetSchedulesForToday();
             for (int i = 0; i < schedules.Count; i++)
             {
                 Panel panel = new();
@@ -125,8 +125,17 @@ namespace BusManager.Presentation.Views
             e.Graphics.DrawImage(qr, e.PageBounds.Width - qr.Width - 100, logo.Height + (300 - qr.Height) / 2);
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private async void searchButton_Click(object sender, EventArgs e)
         {
+            var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
+            var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
+            if (fromList.SelectedIndex != -1 && toList.SelectedIndex != -1)
+            {
+                City from = await stationService.GetCityByName(fromList.SelectedItem.ToString());
+                City to = await stationService.GetCityByName(toList.SelectedItem.ToString());
+                List<Schedule> schedules = await scheduleService.GetSpecificSchedules(from, to, datePicker.Value);
+                LoadSchedules(schedules);
+            }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
