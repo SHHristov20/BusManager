@@ -45,7 +45,12 @@ namespace BusManager.Presentation.Views
             try
             {
                 bool registered = await userService.Register(fName, lName, email, password, repeatPassword);
-                if(registered) windowManager.LoadScene(WindowManager.SCENES.LOGIN);
+                if (registered)
+                {
+                    windowManager.LoggedUser = await userService.Login(email, password);
+                    windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
+                }
+
 
             }
             catch (AggregateException errors)

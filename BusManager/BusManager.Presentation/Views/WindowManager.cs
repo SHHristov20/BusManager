@@ -69,6 +69,13 @@ namespace BusManager.Presentation.Views
             BOOK_TICKET
         }
 
+        public enum USER_TYPES
+        {
+            USER = 1,
+            STAFF = 2,
+            ADMIN = 3
+        }
+
         public void LoadScene(SCENES scene)
         {
             this.Controls.Clear();

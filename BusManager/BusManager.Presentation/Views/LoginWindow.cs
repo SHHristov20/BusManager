@@ -37,12 +37,21 @@ namespace BusManager.Presentation
                 //bool logged = await userService.Login(email, password);
                 User user = await userService.Login(email, password) ?? throw new Exception("Something went wrong!");
                 windowManager.LoggedUser = user;
-                if (user.UserTypeId == 3)
+                WindowManager.USER_TYPES userType = (WindowManager.USER_TYPES)user.UserTypeId;
+                switch(userType)
                 {
-                    windowManager.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+                    case WindowManager.USER_TYPES.USER:
+                        windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
+                        break;
+                    case WindowManager.USER_TYPES.STAFF:
+                        break;
+                    case WindowManager.USER_TYPES.ADMIN:
+                        windowManager.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);
+                        break;
+                    default:
+                        MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                 }
-                else windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
-
             }
             catch (Exception ex)
             {
