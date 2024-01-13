@@ -57,5 +57,26 @@ namespace BusManager.Data.Data.Repositories
                 return false;
             }
         }
+        public async Task<List<Schedule>> GetSchedulesForToday()
+        {
+            DateTime now = DateTime.Now;
+            DateTime endOfDay = now.Date.AddDays(1).AddTicks(-1);
+            return await _dbContext.Schedules
+                .Where(s => s.Time > now && s.Time < endOfDay)
+                .Include(s => s.FromStation)
+                .Include(s => s.ToStation)
+                .ToListAsync();
+        }
+        public async Task<List<Schedule>> GetSpecificSchedules(City from, City to, DateTime date)
+        {
+            DateTime startOfDay = date.Date;
+            DateTime endOfDay = startOfDay.AddDays(1).AddTicks(-1);
+            return await _dbContext.Schedules
+                .Where(s => s.FromStation.City == from && 
+                    s.ToStation.City == to && 
+                    s.Time > startOfDay && 
+                    s.Time < endOfDay)
+                .ToListAsync();
+        }
     }
 }
