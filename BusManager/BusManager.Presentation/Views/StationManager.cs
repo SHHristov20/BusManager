@@ -1,19 +1,6 @@
 ﻿using BusManager.Core.Interfaces;
-using BusManager.Data.Migrations;
 using BusManager.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BusManager.Presentation.Views
 {

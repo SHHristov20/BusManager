@@ -1,6 +1,5 @@
 using BusManager.Core.Interfaces;
 using BusManager.Data.Models;
-using BusManager.Presentation.Properties;
 using BusManager.Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
 

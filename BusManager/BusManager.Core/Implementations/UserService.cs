@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using BusManager.Core.Interfaces;
+﻿using BusManager.Core.Interfaces;
 using BusManager.Core.Validators;
 using BusManager.Data.Data.Repositories;
 using BusManager.Data.Models;
-using Microsoft.IdentityModel.Tokens;
 using static BusManager.Core.Validators.UserValidator;
 
 namespace BusManager.Core.Implementations
