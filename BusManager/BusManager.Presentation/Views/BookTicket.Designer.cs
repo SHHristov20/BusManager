@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             Panel = new Panel();
-            panel1 = new Panel();
+            navPanel = new Panel();
             toList = new ComboBox();
             departureLabel = new Label();
             datePicker = new DateTimePicker();
@@ -38,46 +37,38 @@
             toLabel = new Label();
             fromList = new ComboBox();
             logoutButton = new Button();
-            button2 = new Button();
             fromLabel = new Label();
-            button3 = new Button();
-            button4 = new Button();
             schedulesTable = new TableLayoutPanel();
-            fieldsErrorProvider = new ErrorProvider(components);
             Panel.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).BeginInit();
+            navPanel.SuspendLayout();
             SuspendLayout();
             // 
             // Panel
             // 
             Panel.Anchor = AnchorStyles.None;
-            Panel.Controls.Add(panel1);
+            Panel.Controls.Add(navPanel);
             Panel.Controls.Add(schedulesTable);
             Panel.Location = new Point(0, 0);
             Panel.Name = "Panel";
             Panel.Size = new Size(800, 450);
             Panel.TabIndex = 2;
             // 
-            // panel1
+            // navPanel
             // 
-            panel1.Anchor = AnchorStyles.None;
-            panel1.BackColor = SystemColors.AppWorkspace;
-            panel1.Controls.Add(toList);
-            panel1.Controls.Add(departureLabel);
-            panel1.Controls.Add(datePicker);
-            panel1.Controls.Add(searchButton);
-            panel1.Controls.Add(toLabel);
-            panel1.Controls.Add(fromList);
-            panel1.Controls.Add(logoutButton);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(fromLabel);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button4);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 30);
-            panel1.TabIndex = 10;
+            navPanel.Anchor = AnchorStyles.None;
+            navPanel.BackColor = SystemColors.AppWorkspace;
+            navPanel.Controls.Add(toList);
+            navPanel.Controls.Add(departureLabel);
+            navPanel.Controls.Add(datePicker);
+            navPanel.Controls.Add(searchButton);
+            navPanel.Controls.Add(toLabel);
+            navPanel.Controls.Add(fromList);
+            navPanel.Controls.Add(logoutButton);
+            navPanel.Controls.Add(fromLabel);
+            navPanel.Location = new Point(0, 0);
+            navPanel.Name = "navPanel";
+            navPanel.Size = new Size(800, 30);
+            navPanel.TabIndex = 10;
             // 
             // toList
             // 
@@ -148,17 +139,6 @@
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += logoutButton_Click;
             // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.None;
-            button2.BackColor = SystemColors.Control;
-            button2.Location = new Point(443, -33);
-            button2.Name = "button2";
-            button2.Size = new Size(125, 25);
-            button2.TabIndex = 4;
-            button2.Text = "Manage Stations";
-            button2.UseVisualStyleBackColor = false;
-            // 
             // fromLabel
             // 
             fromLabel.AutoSize = true;
@@ -168,26 +148,6 @@
             fromLabel.Size = new Size(44, 19);
             fromLabel.TabIndex = 6;
             fromLabel.Text = "From:";
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.None;
-            button3.Location = new Point(312, -33);
-            button3.Name = "button3";
-            button3.Size = new Size(125, 25);
-            button3.TabIndex = 3;
-            button3.Text = "Manage Schedules";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.None;
-            button4.Location = new Point(574, -33);
-            button4.Name = "button4";
-            button4.Size = new Size(125, 25);
-            button4.TabIndex = 2;
-            button4.Text = "Manage Accounts";
-            button4.UseVisualStyleBackColor = true;
             // 
             // schedulesTable
             // 
@@ -201,11 +161,6 @@
             schedulesTable.Size = new Size(800, 414);
             schedulesTable.TabIndex = 1;
             // 
-            // fieldsErrorProvider
-            // 
-            fieldsErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
-            fieldsErrorProvider.ContainerControl = this;
-            // 
             // BookTicket
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -215,9 +170,8 @@
             Name = "BookTicket";
             Text = "BookTicket";
             Panel.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).EndInit();
+            navPanel.ResumeLayout(false);
+            navPanel.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -225,15 +179,11 @@
 
         private Panel Panel;
         private Label fromLabel;
-        private ErrorProvider fieldsErrorProvider;
         private TableLayoutPanel schedulesTable;
-        private Panel panel1;
+        private Panel navPanel;
         private Label toLabel;
         private ComboBox fromList;
         private Button logoutButton;
-        private Button button2;
-        private Button button3;
-        private Button button4;
         private Button searchButton;
         private DateTimePicker datePicker;
         private Label departureLabel;
