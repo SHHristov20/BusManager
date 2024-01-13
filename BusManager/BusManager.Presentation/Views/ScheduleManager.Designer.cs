@@ -101,6 +101,7 @@
             datePicker.Name = "datePicker";
             datePicker.Size = new Size(200, 23);
             datePicker.TabIndex = 10;
+            datePicker.MinDate = DateTime.Now;
             // 
             // addScheduleButton
             // 

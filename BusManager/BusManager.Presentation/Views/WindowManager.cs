@@ -25,6 +25,7 @@ namespace BusManager.Presentation.Views
         private readonly RegisterWindow registerWindow = new();
         private readonly StationManager stationManager = new();
         private readonly ScheduleManager scheduleManager = new();
+        private readonly BookTicket bookTicket = new();
 
         public ServiceProvider serviceProvider = new ServiceCollection()
             .AddDbContext<BusManagerDbContext>()
@@ -65,6 +66,7 @@ namespace BusManager.Presentation.Views
             REGISTER,
             STATION_MANAGER,
             SCHEDULE_MANAGER,
+            BOOK_TICKET
         }
 
         public void LoadScene(SCENES scene)
@@ -83,6 +85,9 @@ namespace BusManager.Presentation.Views
                     break;
                 case SCENES.SCHEDULE_MANAGER:
                     this.Controls.Add(scheduleManager.GetPanel());
+                    break;
+                case SCENES.BOOK_TICKET:
+                    this.Controls.Add(bookTicket.GetPanel());
                     break;
             }
         }

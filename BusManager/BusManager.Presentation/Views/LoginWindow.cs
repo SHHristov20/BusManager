@@ -1,5 +1,6 @@
 using BusManager.Core.Interfaces;
 using BusManager.Data.Models;
+using BusManager.Presentation.Properties;
 using BusManager.Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,7 +27,7 @@ namespace BusManager.Presentation
         {
             // temp
             WindowManager windowManager = WindowManager.Instance;
-            windowManager.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);
+            windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
             // temp
             //string email = EmailField.Text;
             //string password = PasswordField.Text;

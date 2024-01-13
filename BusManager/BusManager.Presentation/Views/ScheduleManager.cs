@@ -59,16 +59,17 @@ namespace BusManager.Presentation.Views
         private async void LoadSchedulesTable()
         {
             schedulesTable.Controls.Clear();
+            foreach (Control c in schedulesTable.Controls) c.Dispose();
             var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
             List<Schedule> schedules = await scheduleService.GetAllSchedulesList();
             for (int i = 0; i < schedules.Count; i++)
             {
-                Panel panel = new Panel();
+                Panel panel = new();
                 panel.Width = 500;
                 panel.Height = 50;
-                Label stationName = new Label();
-                Label stationInfo = new Label();
-                Button deleteStation = new Button();
+                Label stationName = new();
+                Label stationInfo = new();
+                Button deleteStation = new();
                 stationName.Text = $"{schedules[i].FromStation.City.Name} - {schedules[i].ToStation.City.Name}";
                 stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
                 stationName.AutoSize = true;
@@ -80,7 +81,7 @@ namespace BusManager.Presentation.Views
                 deleteStation.AutoSize = true;
                 deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
                 int stationIndex = i;
-                deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, schedules[stationIndex], panel);
+                deleteStation.Click += (sender, e) => DeleteStationButton_Click(schedules[stationIndex], panel);
                 panel.Controls.Add(stationName);
                 panel.Controls.Add(stationInfo);
                 panel.Controls.Add(deleteStation);
@@ -96,9 +97,9 @@ namespace BusManager.Presentation.Views
             Panel panel = new Panel();
             panel.Width = 500;
             panel.Height = 50;
-            Label stationName = new Label();
-            Label stationInfo = new Label();
-            Button deleteStation = new Button();
+            Label stationName = new();
+            Label stationInfo = new();
+            Button deleteStation = new();
             stationName.Text = $"{schedule.FromStation.City.Name} - {schedule.ToStation.City.Name}";
             stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
             stationName.AutoSize = true;
@@ -106,16 +107,16 @@ namespace BusManager.Presentation.Views
             stationInfo.Text = $"{schedule.FromStation.Name} - {schedule.ToStation.Name}";
             stationInfo.Location = new Point(0, 20);
             stationInfo.AutoSize = true;
-            deleteStation.Text = "Delete station";
+            deleteStation.Text = "Delete schedule";
             deleteStation.AutoSize = true;
             deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
-            deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, schedule, panel);
+            deleteStation.Click += (sender, e) => DeleteStationButton_Click(schedule, panel);
             panel.Controls.Add(stationName);
             panel.Controls.Add(stationInfo);
             panel.Controls.Add(deleteStation);
             this.schedulesTable.Controls.Add(panel);
         }
-        private async void DeleteStationButton_Click(object? sender, EventArgs e, Schedule schedule, Panel panel)
+        private async void DeleteStationButton_Click(Schedule schedule, Panel panel)
         {
             var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
             bool success = await scheduleService.DeleteSchedule(schedule);

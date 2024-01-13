@@ -30,7 +30,7 @@ namespace BusManager.Presentation.Views
             return this.Panel;
         }
 
-        private async void PopulateCitiesList(/*object sender, PaintEventArgs e*/)
+        private async void PopulateCitiesList()
         {
             stationCityList.Items.Clear();
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
@@ -42,15 +42,16 @@ namespace BusManager.Presentation.Views
         private async void LoadStationsTable()
         {
             stationsTable.Controls.Clear();
+            foreach (Control c in stationsTable.Controls) c.Dispose();
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             List<Station> stations = await stationService.GetAllStationsList();
             for (int i = 0; i < stations.Count; i++)
             {
-                Panel panel = new Panel();
+                Panel panel = new();
                 panel.Width = 500;
                 panel.Height = 50;
-                Label stationName = new Label();
-                Label stationInfo = new Label();
+                Label stationName = new();
+                Label stationInfo = new();
                 Button deleteStation = new Button();
                 stationName.Text = $"{stations[i].Name}";
                 stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
@@ -63,7 +64,7 @@ namespace BusManager.Presentation.Views
                 deleteStation.AutoSize = true;
                 deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
                 int stationIndex = i;
-                deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, stations[stationIndex], panel);
+                deleteStation.Click += (sender, e) => DeleteStationButton_Click(stations[stationIndex], panel);
                 panel.Controls.Add(stationName);
                 panel.Controls.Add(stationInfo);
                 panel.Controls.Add(deleteStation);
@@ -79,8 +80,8 @@ namespace BusManager.Presentation.Views
             Panel panel = new Panel();
             panel.Width = 500;
             panel.Height = 50;
-            Label stationName = new Label();
-            Label stationInfo = new Label();
+            Label stationName = new();
+            Label stationInfo = new();
             Button deleteStation = new Button();
             stationName.Text = $"{station.Name}";
             stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
@@ -92,13 +93,13 @@ namespace BusManager.Presentation.Views
             deleteStation.Text = "Delete station";
             deleteStation.AutoSize = true;
             deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
-            deleteStation.Click += (sender, e) => DeleteStationButton_Click(sender, e, station, panel);
+            deleteStation.Click += (sender, e) => DeleteStationButton_Click(station, panel);
             panel.Controls.Add(stationName);
             panel.Controls.Add(stationInfo);
             panel.Controls.Add(deleteStation);
             this.stationsTable.Controls.Add(panel);
         }
-        private async void DeleteStationButton_Click(object? sender, EventArgs e, Station station, Panel panel)
+        private async void DeleteStationButton_Click(Station station, Panel panel)
         {
             var stationService = WindowManager.Instance.serviceProvider.GetService<IStationService>();
             bool success = await stationService.DeleteStation(station);
