@@ -39,5 +39,13 @@ namespace BusManager.Core.Implementations
         {
             return await _scheduleRepository.DeleteSchedule(schedule);
         }
+        public async Task<List<Schedule>> GetSchedulesForToday() 
+        {
+            return await _scheduleRepository.GetSchedulesForToday();
+        }
+        public async Task<List<Schedule>> GetSpecificSchedules(City from, City to, DateTime date) 
+        {
+            return await _scheduleRepository.GetSpecificSchedules(from, to, date);
+        }
     }
 }
