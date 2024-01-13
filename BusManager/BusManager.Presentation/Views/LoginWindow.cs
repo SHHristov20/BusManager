@@ -26,14 +26,13 @@ namespace BusManager.Presentation
         {
             // temp
             WindowManager windowManager = WindowManager.Instance;
-            //windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
+            // windowManager.LoadScene(WindowManager.SCENES.TICKET_VALIDATOR);
             // temp
             string email = EmailField.Text;
             string password = PasswordField.Text;
             var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
             try
             {
-                //bool logged = await userService.Login(email, password);
                 User user = await userService.Login(email, password) ?? throw new Exception("Something went wrong!");
                 windowManager.LoggedUser = user;
                 WindowManager.USER_TYPES userType = (WindowManager.USER_TYPES)user.UserTypeId;
@@ -43,6 +42,7 @@ namespace BusManager.Presentation
                         windowManager.LoadScene(WindowManager.SCENES.BOOK_TICKET);
                         break;
                     case WindowManager.USER_TYPES.STAFF:
+                        windowManager.LoadScene(WindowManager.SCENES.TICKET_VALIDATOR);
                         break;
                     case WindowManager.USER_TYPES.ADMIN:
                         windowManager.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);

@@ -32,5 +32,9 @@ namespace BusManager.Core.Implementations
             };
             return await _ticketRepository.CreateTicket(ticket);
         }
+        public async Task<Ticket?> CheckTicket(string code)
+        {
+            return await _ticketRepository.CheckTicket(code);
+        }
     }
 }

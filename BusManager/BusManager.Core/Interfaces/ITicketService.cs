@@ -7,5 +7,6 @@ namespace BusManager.Core.Interfaces
     {
         Bitmap GenerateQrCodeForTicket(Ticket ticket);
         Task<Ticket?> BuyTicket(Schedule schedule, User user);
+        Task<Ticket?> CheckTicket(string code);
     }
 }
