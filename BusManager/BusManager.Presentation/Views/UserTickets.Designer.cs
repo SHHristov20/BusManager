@@ -30,6 +30,7 @@
         {
             Panel = new Panel();
             ticketInfo = new Panel();
+            printButton = new Button();
             qrCodeImage = new PictureBox();
             timeLabel = new Label();
             dateLabel = new Label();
@@ -61,6 +62,7 @@
             // ticketInfo
             // 
             ticketInfo.BackColor = Color.LightGray;
+            ticketInfo.Controls.Add(printButton);
             ticketInfo.Controls.Add(qrCodeImage);
             ticketInfo.Controls.Add(timeLabel);
             ticketInfo.Controls.Add(dateLabel);
@@ -73,6 +75,16 @@
             ticketInfo.Name = "ticketInfo";
             ticketInfo.Size = new Size(331, 420);
             ticketInfo.TabIndex = 12;
+            // 
+            // printButton
+            // 
+            printButton.Location = new Point(215, 382);
+            printButton.Name = "printButton";
+            printButton.Size = new Size(104, 32);
+            printButton.TabIndex = 9;
+            printButton.Text = "Print Ticket 🖨️";
+            printButton.UseVisualStyleBackColor = true;
+            printButton.Hide();
             // 
             // qrCodeImage
             // 
@@ -227,5 +239,6 @@
         private Button bookTicketButton;
         private TableLayoutPanel ticketsTable;
         private PictureBox qrCodeImage;
+        private Button printButton;
     }
 }

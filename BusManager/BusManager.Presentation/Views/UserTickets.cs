@@ -1,18 +1,26 @@
-﻿using BusManager.Core.Interfaces;
+﻿using BusManager.Core.Implementations;
+using BusManager.Core.Interfaces;
 using BusManager.Data.Models;
+using BusManager.Presentation.Helpers;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Printing;
+using System.Reflection;
 
 namespace BusManager.Presentation.Views
 {
     public partial class UserTickets : Form
     {
+        private Ticket? selectedTicket;
         public UserTickets()
         {
             InitializeComponent();
         }
         public Panel GetPanel()
         {
-            LoadStationsTable();
+            LoadTicketsTable();
             return Panel;
         }
         private void bookTicketButton_Click(object sender, EventArgs e)
@@ -25,7 +33,7 @@ namespace BusManager.Presentation.Views
             windowManager.LoggedUser = null;
             windowManager.LoadScene(WindowManager.SCENES.LOGIN);
         }
-        private async void LoadStationsTable()
+        private async void LoadTicketsTable()
         {
             ticketsTable.Controls.Clear();
             foreach (Control c in ticketsTable.Controls) c.Dispose();
@@ -62,6 +70,9 @@ namespace BusManager.Presentation.Views
         }
         private void ViewTicket(Ticket ticket, Bitmap qrCode)
         {
+
+            printButton.Click -= printButton_Click;
+            selectedTicket = ticket;
             ticketLabel.Text = $"Ticket - {ticket.Code}";
             citiesLabel.Text = $"{ticket.Schedule.FromStation.City.Name} - {ticket.Schedule.ToStation.City.Name}";
             citiesLabel.Location = new Point((ticketInfo.Width - citiesLabel.Width) / 2, citiesLabel.Location.Y);
@@ -71,6 +82,19 @@ namespace BusManager.Presentation.Views
             nameLabel.Text = $"Name: {ticket.Buyer.FirstName} {ticket.Buyer.LastName}";
             emailLabel.Text = $"Email: {ticket.Buyer.Email}";
             qrCodeImage.Image = qrCode;
+            printButton.Show();
+            printButton.Click += printButton_Click;
+        }
+        private void printButton_Click(object? sender, EventArgs e)
+        {
+                var ticketService = WindowManager.Instance.serviceProvider.GetService<ITicketService>();
+                PrintPreviewDialog printPreview = new();
+                PrintDocument printDocument = new();
+                Bitmap qr = ticketService.GenerateQrCodeForTicket(selectedTicket, 9);
+                printDocument.PrintPage += (sender, e) => PrintTicket.GenerateTicket(sender, e, qr, selectedTicket);
+                printDocument.DocumentName = $"Ticket - {selectedTicket.Code}";
+                printPreview.Document = printDocument;
+                printPreview.ShowDialog();
         }
     }
 }
