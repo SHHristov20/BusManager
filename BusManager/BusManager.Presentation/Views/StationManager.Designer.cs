@@ -216,6 +216,7 @@ namespace BusManager.Presentation.Views
             manageAccountsButton.TabIndex = 2;
             manageAccountsButton.Text = "Manage Accounts";
             manageAccountsButton.UseVisualStyleBackColor = true;
+            manageAccountsButton.Click += manageAccountsButton_Click;
             // 
             // fieldsErrorProvider
             // 

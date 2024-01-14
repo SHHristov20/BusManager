@@ -55,7 +55,6 @@ namespace BusManager.Presentation.Views
             List<Schedule> schedules = await scheduleService.GetAllSchedulesList();
             for (int i = 0; i < schedules.Count; i++)
             {
-                Debug.WriteLine(schedules[i].Time);
                 Panel panel = new();
                 panel.Width = 500;
                 panel.Height = 60;
@@ -141,7 +140,7 @@ namespace BusManager.Presentation.Views
             if (this.fromList.SelectedIndex == -1) this.fieldsErrorProvider.SetError(this.fromList, "From station is required!");
             else this.fieldsErrorProvider.SetError(this.fromList, string.Empty);
             if (this.toList.SelectedIndex == -1) this.fieldsErrorProvider.SetError(this.toList, "To station is required!");
-            else if(this.fromList.SelectedIndex == this.toList.SelectedIndex) this.fieldsErrorProvider.SetError(this.toList, "To and From stations cannot be the same!");
+            else if (this.fromList.SelectedIndex == this.toList.SelectedIndex) this.fieldsErrorProvider.SetError(this.toList, "To and From stations cannot be the same!");
             else this.fieldsErrorProvider.SetError(this.toList, string.Empty);
             if (this.datePicker.Value <= DateTime.Now) this.fieldsErrorProvider.SetError(this.datePicker, "Time and Date must be later!");
             else this.fieldsErrorProvider.SetError(this.datePicker, string.Empty);
@@ -164,6 +163,11 @@ namespace BusManager.Presentation.Views
         private void manageStationsButton_Click(object sender, EventArgs e)
         {
             WindowManager.Instance.LoadScene(WindowManager.SCENES.STATION_MANAGER);
+        }
+
+        private void manageAccountsButton_Click(object sender, EventArgs e)
+        {
+            WindowManager.Instance.LoadScene(WindowManager.SCENES.ACCOUNT_MANAGER);
         }
     }
 }

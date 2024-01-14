@@ -125,5 +125,10 @@ namespace BusManager.Presentation.Views
         {
             WindowManager.Instance.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);
         }
+
+        private void manageAccountsButton_Click(object sender, EventArgs e)
+        {
+            WindowManager.Instance.LoadScene(WindowManager.SCENES.ACCOUNT_MANAGER);
+        }
     }
 }

@@ -98,11 +98,11 @@
             datePicker.CustomFormat = "HH:mm dd/MM/yyyy";
             datePicker.Format = DateTimePickerFormat.Custom;
             datePicker.Location = new Point(12, 236);
+            datePicker.MinDate = new DateTime(2024, 1, 14, 15, 55, 11, 831);
             datePicker.Name = "datePicker";
             datePicker.Size = new Size(200, 23);
             datePicker.TabIndex = 10;
-            datePicker.MinDate = DateTime.Now;
-            datePicker.Value = DateTime.Now;
+            datePicker.Value = new DateTime(2024, 1, 14, 15, 55, 11, 831);
             // 
             // addScheduleButton
             // 
@@ -240,6 +240,7 @@
             manageAccountsButton.TabIndex = 2;
             manageAccountsButton.Text = "Manage Accounts";
             manageAccountsButton.UseVisualStyleBackColor = true;
+            manageAccountsButton.Click += manageAccountsButton_Click;
             // 
             // label1
             // 

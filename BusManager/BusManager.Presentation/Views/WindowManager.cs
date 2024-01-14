@@ -19,6 +19,7 @@ namespace BusManager.Presentation.Views
         private readonly BookTicket bookTicket = new();
         private readonly TicketValidator ticketValidator = new();
         private readonly UserTickets userTickets = new();
+        private readonly AccountManager accountManager = new();
 
         public ServiceProvider serviceProvider = new ServiceCollection()
             .AddDbContext<BusManagerDbContext>()
@@ -61,7 +62,8 @@ namespace BusManager.Presentation.Views
             SCHEDULE_MANAGER,
             BOOK_TICKET,
             TICKET_VALIDATOR,
-            USER_TICKETS
+            USER_TICKETS,
+            ACCOUNT_MANAGER
         }
 
         public enum USER_TYPES
@@ -96,6 +98,9 @@ namespace BusManager.Presentation.Views
                     break;
                 case SCENES.USER_TICKETS:
                     this.Controls.Add(userTickets.GetPanel());
+                    break;
+                case SCENES.ACCOUNT_MANAGER:
+                    this.Controls.Add(accountManager.GetPanel());
                     break;
             }
         }
