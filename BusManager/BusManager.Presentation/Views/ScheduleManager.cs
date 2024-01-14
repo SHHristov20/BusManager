@@ -76,8 +76,8 @@ namespace BusManager.Presentation.Views
                 date.Text = $"Leaves {schedules[i].Time:dd/MM/yyyy} at {schedules[i].Time:HH:mm}";
                 date.Location = new Point(0, 40);
                 date.AutoSize = true;
-                int stationIndex = i;
-                deleteSchedule.Click += (sender, e) => DeleteStationButton_Click(schedules[stationIndex], panel);
+                int scheduleIndex = i;
+                deleteSchedule.Click += (sender, e) => DeleteStationButton_Click(schedules[scheduleIndex], panel);
                 panel.Controls.Add(scheduleRoute);
                 panel.Controls.Add(stationInfo);
                 panel.Controls.Add(deleteSchedule);

@@ -14,12 +14,12 @@ namespace BusManager.Core.Implementations
         {
             _ticketRepository = ticketRepository;
         }
-        public Bitmap GenerateQrCodeForTicket(Ticket ticket)
+        public Bitmap GenerateQrCodeForTicket(Ticket ticket, int size)
         {
             QRCodeGenerator qrCodeGenerator = new();
             QRCodeData qrCodeData = qrCodeGenerator.CreateQrCode(ticket.Code, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(9);
+            Bitmap qrCodeImage = qrCode.GetGraphic(size);
             return qrCodeImage;
         }
         public async Task<Ticket?> BuyTicket(Schedule schedule, User user)
@@ -35,6 +35,10 @@ namespace BusManager.Core.Implementations
         public async Task<Ticket?> CheckTicket(string code)
         {
             return await _ticketRepository.CheckTicket(code);
+        }
+        public async Task<List<Ticket>> ViewTicketsByUser(User user)
+        {
+            return await _ticketRepository.ViewTicketsByUser(user);
         }
     }
 }

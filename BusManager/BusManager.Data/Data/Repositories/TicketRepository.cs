@@ -36,5 +36,21 @@ namespace BusManager.Data.Data.Repositories
             }
             catch { return null; }
         }
+        public async Task<List<Ticket>> ViewTicketsByUser(User user)
+        {
+            try
+            {
+                return await _dbContext.Tickets
+                    .Where(t => t.Buyer == user)
+                    .Include(t => t.Schedule.FromStation)
+                    .Include(t => t.Schedule.ToStation)
+                    .Include(t => t.Schedule.FromStation.City)
+                    .Include(t => t.Schedule.ToStation.City)
+                    .Include(t => t.Buyer)
+                    .OrderByDescending(t => t.Schedule.Time)
+                    .ToListAsync();
+            }
+            catch { return []; }
+        }
     }
 }

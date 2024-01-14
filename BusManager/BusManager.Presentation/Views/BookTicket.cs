@@ -83,9 +83,9 @@ namespace BusManager.Presentation.Views
             PrintPreviewDialog printPreview = new();
             PrintDocument printDocument = new();
             Ticket ticket = await ticketService.BuyTicket(schedule, windowManager.LoggedUser);
-            if (ticket !=  null)
+            if (ticket != null)
             {
-                Bitmap qr = ticketService.GenerateQrCodeForTicket(ticket);
+                Bitmap qr = ticketService.GenerateQrCodeForTicket(ticket, 9);
                 printDocument.PrintPage += (sender, e) => this.GenerateTicket(sender, e, qr, ticket);
                 printDocument.DocumentName = $"Ticket - {ticket.Code}";
                 printPreview.Document = printDocument;
@@ -96,12 +96,12 @@ namespace BusManager.Presentation.Views
         private void GenerateTicket(object sender, PrintPageEventArgs e, Bitmap qr, Ticket ticket)
         {
             Image logo = Properties.Resources.Logo;
-            Font font = new ("Times New Roman", 16);
+            Font font = new("Times New Roman", 16);
             Font fontBold = new Font(font, FontStyle.Bold);
-            SolidBrush brush = new (Color.Black);
+            SolidBrush brush = new(Color.Black);
             float x = (e.PageBounds.Width - 700) / 2;
             float y = logo.Height;
-            e.Graphics.DrawImage(logo, logo.Width/2, 0);
+            e.Graphics.DrawImage(logo, logo.Width / 2, 0);
             e.Graphics.DrawRectangle(new Pen(Color.Black, 2), (e.PageBounds.Width - 700) / 2, logo.Height, 700, 300);
             e.Graphics.DrawString($"Ticket - {ticket.Code}", fontBold, brush, new PointF(x, y + 5));
             e.Graphics.DrawString($"{WindowManager.Instance.LoggedUser.FirstName} {WindowManager.Instance.LoggedUser.LastName}", fontBold, brush, new PointF(x, y + 50));
@@ -130,6 +130,11 @@ namespace BusManager.Presentation.Views
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoggedUser = null;
             windowManager.LoadScene(WindowManager.SCENES.LOGIN);
+        }
+
+        private void ticketsButton_Click(object sender, EventArgs e)
+        {
+            WindowManager.Instance.LoadScene(WindowManager.SCENES.USER_TICKETS);
         }
     }
 }

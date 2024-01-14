@@ -39,6 +39,7 @@
             logoutButton = new Button();
             fromLabel = new Label();
             schedulesTable = new TableLayoutPanel();
+            ticketsButton = new Button();
             Panel.SuspendLayout();
             navPanel.SuspendLayout();
             SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             navPanel.Anchor = AnchorStyles.None;
             navPanel.BackColor = SystemColors.AppWorkspace;
+            navPanel.Controls.Add(ticketsButton);
             navPanel.Controls.Add(toList);
             navPanel.Controls.Add(departureLabel);
             navPanel.Controls.Add(datePicker);
@@ -94,11 +96,11 @@
             datePicker.CustomFormat = "dd/MM/yyyy";
             datePicker.Format = DateTimePickerFormat.Custom;
             datePicker.Location = new Point(411, 3);
-            datePicker.MinDate = DateTime.Now;
+            datePicker.MinDate = new DateTime(2024, 1, 14, 14, 26, 57, 628);
             datePicker.Name = "datePicker";
             datePicker.Size = new Size(95, 23);
             datePicker.TabIndex = 10;
-            datePicker.Value = DateTime.Now;
+            datePicker.Value = new DateTime(2024, 1, 14, 14, 26, 57, 630);
             // 
             // searchButton
             // 
@@ -161,6 +163,16 @@
             schedulesTable.Size = new Size(800, 414);
             schedulesTable.TabIndex = 1;
             // 
+            // ticketsButton
+            // 
+            ticketsButton.Location = new Point(593, 2);
+            ticketsButton.Name = "ticketsButton";
+            ticketsButton.Size = new Size(114, 25);
+            ticketsButton.TabIndex = 13;
+            ticketsButton.Text = "View tickets";
+            ticketsButton.UseVisualStyleBackColor = true;
+            ticketsButton.Click += ticketsButton_Click;
+            // 
             // BookTicket
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -188,5 +200,6 @@
         private DateTimePicker datePicker;
         private Label departureLabel;
         private ComboBox toList;
+        private Button ticketsButton;
     }
 }
