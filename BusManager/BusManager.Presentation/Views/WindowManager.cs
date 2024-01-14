@@ -24,7 +24,6 @@ namespace BusManager.Presentation.Views
         public ServiceProvider serviceProvider = new ServiceCollection()
             .AddDbContext<BusManagerDbContext>()
             .AddSingleton<UserRepository>()
-            .AddSingleton<UserTypeRepository>()
             .AddSingleton<CityRepository>()
             .AddSingleton<StationRepository>()
             .AddSingleton<ScheduleRepository>()
