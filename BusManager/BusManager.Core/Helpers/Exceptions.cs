@@ -30,7 +30,7 @@ namespace BusManager.Core.Helpers
         }
         class PasswordNotMatchingException : Exception
         {
-            public PasswordNotMatchingException() : base("Passwords must match!") { }
+            public PasswordNotMatchingException() : base("Password doesnt't match!") { }
         }
         class UserNotExistException : Exception
         {

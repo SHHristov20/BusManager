@@ -18,7 +18,7 @@ namespace BusManager.Core.Implementations
         {
             if(string.IsNullOrEmpty(email)|| string.IsNullOrEmpty(password)) { throw new Exception("Please fill this field!"); }
             User user = await _userRepository.FindUserByEmail(email) ?? throw new UserNotExistException();
-            if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new InvalidPasswordException();
+            if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new PasswordNotMatchingException();
             return user;
         }
         public async Task<bool> Register(string fName, string lName, string email, string password, string repeatPassword) 

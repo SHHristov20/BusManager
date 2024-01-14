@@ -58,7 +58,7 @@ namespace BusManager.Presentation
                     case "UserNotExistException":
                         fieldsErrorProvider.SetError(EmailField, ex.Message);
                         break;
-                    case "InvalidPasswordException":
+                    case "PasswordNotMatchingException":
                         fieldsErrorProvider.SetError(PasswordField, ex.Message);
                         break;
                     case "Exception":
