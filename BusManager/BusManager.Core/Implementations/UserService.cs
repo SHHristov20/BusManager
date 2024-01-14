@@ -48,5 +48,17 @@ namespace BusManager.Core.Implementations
         {
             return await _userRepository.FindUserByEmail(email.ToLower()) == null;
         }
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _userRepository.GetAllUsers();
+        }
+        public async Task<bool> DeleteUser(User user)
+        {
+            return await _userRepository.DeleteUser(user);
+        }
+        public async Task<bool> ChangeUserType(User user, int userTypeId)
+        {
+            return await _userRepository.ChangeUserType(user, userTypeId);
+        }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Panel = new Panel();
+            usersTable = new TableLayoutPanel();
             navPanel = new Panel();
             logoutButton = new Button();
             manageAccountsButton = new Button();
@@ -40,11 +41,24 @@
             // 
             // Panel
             // 
+            Panel.Controls.Add(usersTable);
             Panel.Controls.Add(navPanel);
             Panel.Location = new Point(0, 0);
             Panel.Name = "Panel";
             Panel.Size = new Size(800, 450);
             Panel.TabIndex = 0;
+            // 
+            // usersTable
+            // 
+            usersTable.AutoScroll = true;
+            usersTable.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            usersTable.ColumnCount = 1;
+            usersTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            usersTable.Location = new Point(3, 33);
+            usersTable.Name = "usersTable";
+            usersTable.Padding = new Padding(0, 0, 17, 0);
+            usersTable.Size = new Size(800, 414);
+            usersTable.TabIndex = 2;
             // 
             // navPanel
             // 
@@ -123,5 +137,6 @@
         private Button manageAccountsButton;
         private Button manageSchedulesButton;
         private Button manageStationsButton;
+        private TableLayoutPanel usersTable;
     }
 }

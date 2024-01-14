@@ -23,4 +23,19 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Data\Diagrams\BusManagerDbDiagram.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BusManagerDbDiagram.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Diagrams\BusManagerDbDiagram.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BusManagerDbDiagram.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
 </Project>
