@@ -1,4 +1,4 @@
-<h1 align="center">Team MOPS</h1>
+<h1 align="center">BusManager</h1>
  
 <p align="center">
 <img src="https://imgur.com/u2JeoHt.png" align="center"/>
