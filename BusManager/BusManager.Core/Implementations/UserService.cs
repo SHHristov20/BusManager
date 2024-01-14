@@ -3,6 +3,7 @@ using BusManager.Core.Validators;
 using BusManager.Data.Data.Repositories;
 using BusManager.Data.Models;
 using static BusManager.Core.Validators.UserValidator;
+using BusManager.Core.Helpers.Exceptions;
 
 namespace BusManager.Core.Implementations
 {
@@ -15,21 +16,21 @@ namespace BusManager.Core.Implementations
         }
         public async Task<User> Login(string email, string password) 
         {
-            if(string.IsNullOrEmpty(email)|| string.IsNullOrEmpty(password)) { throw new Exception("Please fill all fields"); }
-            User user = await _userRepository.FindUserByEmail(email) ?? throw new Exception("User does not exist");
-            if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new Exception("Invalid password");
+            if(string.IsNullOrEmpty(email)|| string.IsNullOrEmpty(password)) { throw new Exception("Please fill this field!"); }
+            User user = await _userRepository.FindUserByEmail(email) ?? throw new UserNotExistException();
+            if (!PasswordValidator.VerifyPassword(password, user.Password)) throw new InvalidPasswordException();
             return user;
         }
         public async Task<bool> Register(string fName, string lName, string email, string password, string repeatPassword) 
         {
             List<Exception> exceptions = new();
-            if(!ValidateName(fName)) { exceptions.Add(new ArgumentException("First name must be in English")); }
-            if(!ValidateName(lName)) { exceptions.Add(new ArgumentException("Last name must be in English")); }
-            if(!ValidateEmail(email)) { exceptions.Add(new ArgumentException("Invalid email address")); }
-            if(!ValidatePassword(password)) { exceptions.Add(new ArgumentException("Password must contain at least 8 characters")); }
-            if(!PasswordsMatch(password, repeatPassword)) { exceptions.Add(new ArgumentException("Passwords must match")); }
-            if(!await IsEmailAvailable(email)) { exceptions.Add(new ArgumentException("Email already in use")); }
-            if (exceptions.Any()) { throw new AggregateException("Error", exceptions); }
+            if(!ValidateName(fName)) { exceptions.Add(new InvalidFirstNameException()); }
+            if(!ValidateName(lName)) { exceptions.Add(new InvalidLastNameException()); }
+            if(!ValidateEmail(email)) { exceptions.Add(new InvalidEmailException()); }
+            if(!ValidatePassword(password)) { exceptions.Add(new InvalidPasswordException()); }
+            if(!PasswordsMatch(password, repeatPassword)) { exceptions.Add(new PasswordNotMatchingException()); }
+            if(!await IsEmailAvailable(email)) { exceptions.Add(new EmailInUseException()); }
+            if (exceptions.Any()) { throw new AggregateException("Invalid fields!", exceptions); }
             string passwordHash = PasswordValidator.HashPassword(password);
             User user = new()
             {

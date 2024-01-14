@@ -30,6 +30,7 @@ namespace BusManager.Presentation
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginWindow));
             LoginButton = new Button();
             PasswordField = new TextBox();
@@ -37,8 +38,10 @@ namespace BusManager.Presentation
             Logo = new PictureBox();
             RegisterButton = new LinkLabel();
             Panel = new Panel();
+            fieldsErrorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
             Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // LoginButton
@@ -107,6 +110,11 @@ namespace BusManager.Presentation
             Panel.Size = new Size(800, 450);
             Panel.TabIndex = 5;
             // 
+            // fieldsErrorProvider
+            // 
+            fieldsErrorProvider.ContainerControl = this;
+            fieldsErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            // 
             // LoginWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -118,6 +126,7 @@ namespace BusManager.Presentation
             ((System.ComponentModel.ISupportInitialize)Logo).EndInit();
             Panel.ResumeLayout(false);
             Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).EndInit();
             ResumeLayout(false);
         }
 
@@ -129,5 +138,6 @@ namespace BusManager.Presentation
         private PictureBox Logo;
         private LinkLabel RegisterButton;
         private Panel Panel;
+        private ErrorProvider fieldsErrorProvider;
     }
 }

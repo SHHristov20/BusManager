@@ -24,10 +24,9 @@ namespace BusManager.Presentation
 
         private async void LoginButton_Click(object sender, EventArgs e)
         {
-            // temp
             WindowManager windowManager = WindowManager.Instance;
-            // windowManager.LoadScene(WindowManager.SCENES.TICKET_VALIDATOR);
-            // temp
+            fieldsErrorProvider.SetError(EmailField, string.Empty);
+            fieldsErrorProvider.SetError(PasswordField, string.Empty);
             string email = EmailField.Text;
             string password = PasswordField.Text;
             var userService = WindowManager.Instance.serviceProvider.GetService<IUserService>();
@@ -54,7 +53,22 @@ namespace BusManager.Presentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                switch(ex.GetType().Name)
+                {
+                    case "UserNotExistException":
+                        fieldsErrorProvider.SetError(EmailField, ex.Message);
+                        break;
+                    case "InvalidPasswordException":
+                        fieldsErrorProvider.SetError(PasswordField, ex.Message);
+                        break;
+                    case "Exception":
+                        if(string.IsNullOrEmpty(email)) fieldsErrorProvider.SetError(EmailField, ex.Message);
+                        if (string.IsNullOrEmpty(password)) fieldsErrorProvider.SetError(PasswordField, ex.Message);
+                        break;
+                    default:
+                        MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
         }
     }

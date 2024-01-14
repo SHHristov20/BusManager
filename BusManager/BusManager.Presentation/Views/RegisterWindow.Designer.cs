@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterWindow));
             Panel = new Panel();
             LoginButton = new LinkLabel();
@@ -38,8 +39,10 @@
             EmailField = new TextBox();
             LastNameField = new TextBox();
             FirstNameField = new TextBox();
+            fieldsErrorProvider = new ErrorProvider(components);
             Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Logo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // Panel
@@ -140,6 +143,11 @@
             FirstNameField.Size = new Size(150, 23);
             FirstNameField.TabIndex = 2;
             // 
+            // fieldsErrorProvider
+            // 
+            fieldsErrorProvider.ContainerControl = this;
+            fieldsErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            // 
             // RegisterWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -151,6 +159,7 @@
             Panel.ResumeLayout(false);
             Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Logo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fieldsErrorProvider).EndInit();
             ResumeLayout(false);
         }
 
@@ -165,5 +174,6 @@
         private Button RegisterButton;
         private PictureBox Logo;
         private LinkLabel LoginButton;
+        private ErrorProvider fieldsErrorProvider;
     }
 }

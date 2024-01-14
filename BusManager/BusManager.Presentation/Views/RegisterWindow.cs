@@ -1,5 +1,9 @@
 ﻿using BusManager.Core.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using BusManager.Core.Helpers.Exceptions;
+using System.ComponentModel;
+using System.Runtime.ExceptionServices;
+using System.Diagnostics;
 
 namespace BusManager.Presentation.Views
 {
@@ -23,12 +27,17 @@ namespace BusManager.Presentation.Views
 
         private async void RegisterButton_ClickAsync(object sender, EventArgs e)
         {
+            fieldsErrorProvider.SetError(FirstNameField, string.Empty);
+            fieldsErrorProvider.SetError(LastNameField, string.Empty);
+            fieldsErrorProvider.SetError(EmailField, string.Empty);
+            fieldsErrorProvider.SetError(EmailField, string.Empty);
+            fieldsErrorProvider.SetError(PasswordField, string.Empty);
+            fieldsErrorProvider.SetError(RepeatPasswordField, string.Empty);
             string fName = FirstNameField.Text;
             string lName = LastNameField.Text;
             string email = EmailField.Text;
             string password = PasswordField.Text;
             string repeatPassword = RepeatPasswordField.Text;
-            //UserService userService = new();
             WindowManager windowManager = WindowManager.Instance;
             var userService = windowManager.serviceProvider.GetService<IUserService>();
             try
@@ -44,13 +53,33 @@ namespace BusManager.Presentation.Views
             }
             catch (AggregateException errors)
             {
-                string errorMessage = "";
-
-                foreach(Exception error in errors.InnerExceptions)
+                foreach(var ex in errors.InnerExceptions)
                 {
-                    errorMessage += "- " + error.Message + '\n';
+                    switch (ex.GetType().Name)
+                    {
+                        case "InvalidFirstNameException":
+                            fieldsErrorProvider.SetError(FirstNameField, ex.Message);
+                            break;
+                        case "InvalidLastNameException":
+                            fieldsErrorProvider.SetError(LastNameField, ex.Message);
+                            break;
+                        case "InvalidEmailException":
+                            fieldsErrorProvider.SetError(EmailField, ex.Message);
+                            break;
+                        case "EmailInUseException":
+                            fieldsErrorProvider.SetError(EmailField, ex.Message);
+                            break;
+                        case "InvalidPasswordException":
+                            fieldsErrorProvider.SetError(PasswordField, ex.Message);
+                            break;
+                        case "PasswordNotMatchingException":
+                            fieldsErrorProvider.SetError(RepeatPasswordField, ex.Message);
+                            break;
+                        default:
+                            MessageBox.Show("Something went wrong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
                 }
-                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

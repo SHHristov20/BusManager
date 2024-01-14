@@ -83,7 +83,7 @@ namespace BusManager.Presentation.Views
             // 
             // logo
             // 
-            logo.Image = Properties.Resources.Logo;
+            logo.Image = Resources.Logo;
             logo.Location = new Point(3, 30);
             logo.Name = "logo";
             logo.Size = new Size(463, 256);
@@ -132,9 +132,9 @@ namespace BusManager.Presentation.Views
             timeLabel.Font = new Font("Segoe UI", 12F);
             timeLabel.Location = new Point(14, 160);
             timeLabel.Name = "timeLabel";
-            timeLabel.Size = new Size(164, 21);
+            timeLabel.Size = new Size(121, 21);
             timeLabel.TabIndex = 7;
-            timeLabel.Text = "Departure Time: 12:03";
+            timeLabel.Text = "Departure Time:";
             // 
             // dateLabel
             // 
@@ -142,9 +142,9 @@ namespace BusManager.Presentation.Views
             dateLabel.Font = new Font("Segoe UI", 12F);
             dateLabel.Location = new Point(14, 120);
             dateLabel.Name = "dateLabel";
-            dateLabel.Size = new Size(207, 21);
+            dateLabel.Size = new Size(119, 21);
             dateLabel.TabIndex = 6;
-            dateLabel.Text = "Departure Date: 12/01/2024";
+            dateLabel.Text = "Departure Date:";
             // 
             // emailLabel
             // 
@@ -152,9 +152,9 @@ namespace BusManager.Presentation.Views
             emailLabel.Font = new Font("Segoe UI", 12F);
             emailLabel.Location = new Point(14, 240);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new Size(140, 21);
+            emailLabel.Size = new Size(51, 21);
             emailLabel.TabIndex = 5;
-            emailLabel.Text = "Email: asd@abv.bg";
+            emailLabel.Text = "Email:";
             // 
             // nameLabel
             // 
@@ -162,9 +162,9 @@ namespace BusManager.Presentation.Views
             nameLabel.Font = new Font("Segoe UI", 12F);
             nameLabel.Location = new Point(14, 200);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(156, 21);
+            nameLabel.Size = new Size(55, 21);
             nameLabel.TabIndex = 4;
-            nameLabel.Text = "Name: Stefan Hristov";
+            nameLabel.Text = "Name:";
             // 
             // stationsLabel
             // 
@@ -172,19 +172,19 @@ namespace BusManager.Presentation.Views
             stationsLabel.Font = new Font("Segoe UI", 12F);
             stationsLabel.Location = new Point(14, 80);
             stationsLabel.Name = "stationsLabel";
-            stationsLabel.Size = new Size(134, 21);
+            stationsLabel.Size = new Size(68, 21);
             stationsLabel.TabIndex = 3;
-            stationsLabel.Text = "Stations: asd - asd";
+            stationsLabel.Text = "Stations:";
             // 
             // citiesLabel
             // 
             citiesLabel.AutoSize = true;
             citiesLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            citiesLabel.Location = new Point(83, 33);
+            citiesLabel.Location = new Point(158, 33);
             citiesLabel.Name = "citiesLabel";
-            citiesLabel.Size = new Size(150, 28);
+            citiesLabel.Size = new Size(20, 28);
             citiesLabel.TabIndex = 2;
-            citiesLabel.Text = "Burgas - Varna";
+            citiesLabel.Text = "-";
             // 
             // ticketLabel
             // 

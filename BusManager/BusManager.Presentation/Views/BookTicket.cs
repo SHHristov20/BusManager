@@ -129,8 +129,7 @@ namespace BusManager.Presentation.Views
         {
             WindowManager windowManager = WindowManager.Instance;
             windowManager.LoggedUser = null;
-            //windowManager.LoadScene(WindowManager.SCENES.LOGIN);
-            windowManager.LoadScene(WindowManager.SCENES.SCHEDULE_MANAGER);
+            windowManager.LoadScene(WindowManager.SCENES.LOGIN);
         }
     }
 }
