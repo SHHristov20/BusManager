@@ -61,6 +61,8 @@ namespace BusManager.Data.Data.Repositories
                 .Where(s => s.Time > now && s.Time < endOfDay)
                 .Include(s => s.FromStation)
                 .Include(s => s.ToStation)
+                .Include(s => s.FromStation.City)
+                .Include(s => s.ToStation.City)
                 .OrderBy(s => s.Time)
                 .ToListAsync();
         }
@@ -73,6 +75,10 @@ namespace BusManager.Data.Data.Repositories
                     s.ToStation.City == to && 
                     s.Time > startOfDay && 
                     s.Time < endOfDay)
+                .Include(s => s.FromStation)
+                .Include(s => s.ToStation)
+                .Include(s => s.FromStation.City)
+                .Include(s => s.ToStation.City)
                 .OrderBy(s => s.Time)
                 .ToListAsync();
         }

@@ -34,7 +34,7 @@ namespace BusManager.Presentation.Views
                     ticketLabel.Text = $"Ticket - {ticket.Code}";
                     citiesLabel.Text = $"{ticket.Schedule.FromStation.City.Name} - {ticket.Schedule.ToStation.City.Name}";
                     citiesLabel.Location = new Point((ticketInfo.Width - citiesLabel.Width) / 2, citiesLabel.Location.Y);
-                    stationsLabel.Text = $"Stations: {ticket.Schedule.FromStation.Name} - {ticket.Schedule.ToStation.Name}";
+                    stationsLabel.Text = $"{ticket.Schedule.FromStation.Name} - {ticket.Schedule.ToStation.Name}";
                     dateLabel.Text = $"Departure Date: {ticket.Schedule.Time:dd/MM/yyyy}";
                     timeLabel.Text = $"Departure Time: {ticket.Schedule.Time:HH:mm}";
                     nameLabel.Text = $"Name: {ticket.Buyer.FirstName} {ticket.Buyer.LastName}";
