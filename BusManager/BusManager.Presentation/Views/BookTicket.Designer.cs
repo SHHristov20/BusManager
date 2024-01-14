@@ -94,11 +94,11 @@
             datePicker.CustomFormat = "dd/MM/yyyy";
             datePicker.Format = DateTimePickerFormat.Custom;
             datePicker.Location = new Point(411, 3);
-            datePicker.MinDate = new DateTime(2024, 1, 13, 19, 7, 51, 319);
+            datePicker.MinDate = DateTime.Now;
             datePicker.Name = "datePicker";
             datePicker.Size = new Size(95, 23);
             datePicker.TabIndex = 10;
-            datePicker.Value = new DateTime(2024, 1, 13, 19, 7, 51, 319);
+            datePicker.Value = DateTime.Now;
             // 
             // searchButton
             // 

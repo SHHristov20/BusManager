@@ -1,6 +1,8 @@
 ﻿using BusManager.Core.Interfaces;
 using BusManager.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusManager.Presentation.Views
 {
@@ -53,27 +55,33 @@ namespace BusManager.Presentation.Views
             List<Schedule> schedules = await scheduleService.GetAllSchedulesList();
             for (int i = 0; i < schedules.Count; i++)
             {
+                Debug.WriteLine(schedules[i].Time);
                 Panel panel = new();
                 panel.Width = 500;
-                panel.Height = 50;
-                Label stationName = new();
+                panel.Height = 60;
+                Label scheduleRoute = new();
                 Label stationInfo = new();
-                Button deleteStation = new();
-                stationName.Text = $"{schedules[i].FromStation.City.Name} - {schedules[i].ToStation.City.Name}";
-                stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
-                stationName.AutoSize = true;
-                stationName.Anchor = AnchorStyles.Left;
+                Label date = new();
+                Button deleteSchedule = new();
+                scheduleRoute.Text = $"{schedules[i].FromStation.City.Name} - {schedules[i].ToStation.City.Name}";
+                scheduleRoute.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+                scheduleRoute.AutoSize = true;
+                scheduleRoute.Anchor = AnchorStyles.Left;
                 stationInfo.Text = $"{schedules[i].FromStation.Name} - {schedules[i].ToStation.Name}";
                 stationInfo.Location = new Point(0, 20);
                 stationInfo.AutoSize = true;
-                deleteStation.Text = "Delete schedule";
-                deleteStation.AutoSize = true;
-                deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
+                deleteSchedule.Text = "Delete schedule";
+                deleteSchedule.AutoSize = true;
+                deleteSchedule.Location = new Point(370, panel.Height / 2 - deleteSchedule.Height / 2);
+                date.Text = $"Leaves {schedules[i].Time:dd/MM/yyyy} at {schedules[i].Time:HH:mm}";
+                date.Location = new Point(0, 40);
+                date.AutoSize = true;
                 int stationIndex = i;
-                deleteStation.Click += (sender, e) => DeleteStationButton_Click(schedules[stationIndex], panel);
-                panel.Controls.Add(stationName);
+                deleteSchedule.Click += (sender, e) => DeleteStationButton_Click(schedules[stationIndex], panel);
+                panel.Controls.Add(scheduleRoute);
                 panel.Controls.Add(stationInfo);
-                panel.Controls.Add(deleteStation);
+                panel.Controls.Add(deleteSchedule);
+                panel.Controls.Add(date);
                 this.schedulesTable.Controls.Add(panel, 0, i);
             }
             schedulesTable.PerformLayout();
@@ -83,26 +91,31 @@ namespace BusManager.Presentation.Views
         {
             var scheduleService = WindowManager.Instance.serviceProvider.GetService<IScheduleService>();
             Schedule schedule = await scheduleService.GetLastAddedSchedule();
-            Panel panel = new Panel();
+            Panel panel = new();
             panel.Width = 500;
-            panel.Height = 50;
-            Label stationName = new();
+            panel.Height = 60;
+            Label scheduleRoute = new();
             Label stationInfo = new();
-            Button deleteStation = new();
-            stationName.Text = $"{schedule.FromStation.City.Name} - {schedule.ToStation.City.Name}";
-            stationName.Font = new Font(Label.DefaultFont, FontStyle.Bold);
-            stationName.AutoSize = true;
-            stationName.Anchor = AnchorStyles.Left;
+            Button deleteSchedule = new();
+            Label date = new();
+            scheduleRoute.Text = $"{schedule.FromStation.City.Name} - {schedule.ToStation.City.Name}";
+            scheduleRoute.Font = new Font(Label.DefaultFont, FontStyle.Bold);
+            scheduleRoute.AutoSize = true;
+            scheduleRoute.Anchor = AnchorStyles.Left;
             stationInfo.Text = $"{schedule.FromStation.Name} - {schedule.ToStation.Name}";
             stationInfo.Location = new Point(0, 20);
             stationInfo.AutoSize = true;
-            deleteStation.Text = "Delete schedule";
-            deleteStation.AutoSize = true;
-            deleteStation.Location = new Point(370, panel.Height / 2 - deleteStation.Height / 2);
-            deleteStation.Click += (sender, e) => DeleteStationButton_Click(schedule, panel);
-            panel.Controls.Add(stationName);
+            deleteSchedule.Text = "Delete schedule";
+            deleteSchedule.AutoSize = true;
+            deleteSchedule.Location = new Point(370, panel.Height / 2 - deleteSchedule.Height / 2);
+            deleteSchedule.Click += (sender, e) => DeleteStationButton_Click(schedule, panel);
+            date.Text = $"Leaves {schedule.Time:dd/MM/yyyy} at {schedule.Time:HH:mm}";
+            date.Location = new Point(0, 40);
+            date.AutoSize = true;
+            panel.Controls.Add(scheduleRoute);
             panel.Controls.Add(stationInfo);
-            panel.Controls.Add(deleteStation);
+            panel.Controls.Add(deleteSchedule);
+            panel.Controls.Add(date);
             this.schedulesTable.Controls.Add(panel);
         }
         private async void DeleteStationButton_Click(Schedule schedule, Panel panel)

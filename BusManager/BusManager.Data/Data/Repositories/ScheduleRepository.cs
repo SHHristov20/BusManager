@@ -31,6 +31,7 @@ namespace BusManager.Data.Data.Repositories
                 .Include(s => s.ToStation)
                 .Include(s => s.FromStation.City)
                 .Include(s => s.ToStation.City)
+                .OrderByDescending(s => s.Time)
                 .ToListAsync();
         }
         public async Task<Schedule?> GetLastAddedSchedule()
@@ -60,6 +61,7 @@ namespace BusManager.Data.Data.Repositories
                 .Where(s => s.Time > now && s.Time < endOfDay)
                 .Include(s => s.FromStation)
                 .Include(s => s.ToStation)
+                .OrderBy(s => s.Time)
                 .ToListAsync();
         }
         public async Task<List<Schedule>> GetSpecificSchedules(City from, City to, DateTime date)
@@ -71,6 +73,7 @@ namespace BusManager.Data.Data.Repositories
                     s.ToStation.City == to && 
                     s.Time > startOfDay && 
                     s.Time < endOfDay)
+                .OrderBy(s => s.Time)
                 .ToListAsync();
         }
     }
