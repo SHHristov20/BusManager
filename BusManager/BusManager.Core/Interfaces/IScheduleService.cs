@@ -10,5 +10,6 @@ namespace BusManager.Core.Interfaces
         Task<bool> DeleteSchedule(Schedule schedule);
         Task<List<Schedule>> GetSchedulesForToday();
         Task<List<Schedule>> GetSpecificSchedules(City from, City to, DateTime date);
+        Task<List<Schedule>> GetSchedulesForDate(DateTime date);
     }
 }

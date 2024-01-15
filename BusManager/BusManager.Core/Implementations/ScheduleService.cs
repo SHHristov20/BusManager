@@ -42,5 +42,9 @@ namespace BusManager.Core.Implementations
         {
             return await _scheduleRepository.GetSpecificSchedules(from, to, date);
         }
+        public async Task<List<Schedule>> GetSchedulesForDate(DateTime date)
+        {
+            return await _scheduleRepository.GetSchedulesForDate(date);
+        }
     }
 }

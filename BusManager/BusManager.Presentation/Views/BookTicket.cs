@@ -106,6 +106,11 @@ namespace BusManager.Presentation.Views
                 List<Schedule> schedules = await scheduleService.GetSpecificSchedules(from, to, datePicker.Value);
                 LoadSchedules(schedules);
             }
+            else
+            {
+                List<Schedule> schedules = await scheduleService.GetSchedulesForDate(datePicker.Value);
+                LoadSchedules(schedules);
+            }
         }
 
         private void logoutButton_Click(object sender, EventArgs e)

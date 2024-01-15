@@ -82,5 +82,19 @@ namespace BusManager.Data.Data.Repositories
                 .OrderBy(s => s.Time)
                 .ToListAsync();
         }
+        public async Task<List<Schedule>> GetSchedulesForDate(DateTime date)
+        {
+            DateTime startOfDay = date.Date;
+            DateTime endOfDay = startOfDay.AddDays(1).AddTicks(-1);
+            return await _dbContext.Schedules
+                .Where(s => s.Time > startOfDay &&
+                    s.Time < endOfDay)
+                .Include(s => s.FromStation)
+                .Include(s => s.ToStation)
+                .Include(s => s.FromStation.City)
+                .Include(s => s.ToStation.City)
+                .OrderBy(s => s.Time)
+                .ToListAsync();
+        }
     }
 }
