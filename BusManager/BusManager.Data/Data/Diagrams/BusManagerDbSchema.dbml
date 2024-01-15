@@ -1,0 +1,47 @@
+Table UserTypes {
+  Id int [primary key]
+  Name nvarchar(max) [not null]
+}
+
+Table Users {
+  Id int [primary key]
+  FirstName nvarchar(max) [not null]
+  LastName nvarchar(max) [not null]
+  Email nvarchar(max) [not null]
+  Password nvarchar(max) [not null]
+  UserTypeId int [not null]
+}
+
+Table Cities {
+  Id int [primary key]
+  Name nvarchar(max) [not null]
+}
+
+Table Stations {
+  Id int [primary key]
+  Name nvarchar(max) [not null]
+  Address nvarchar(max) [not null]
+  CityId int [not null]
+}
+
+Table Schedules {
+  Id int [primary key]
+  Time datetime2 [not null]
+  Price real [not null]
+  FromStationId int [not null]
+  ToStationId int [not null]
+}
+
+Table Tickets {
+  Id int [primary key]
+  Code nvarchar(max) [not null]
+  BuyerId int [not null]
+  ScheduleId int [not null]
+}
+
+Ref: Users.UserTypeId > UserTypes.Id
+Ref: Stations.CityId > Cities.Id
+Ref: Schedules.FromStationId > Stations.Id
+Ref: Schedules.ToStationId > Stations.Id
+Ref: Tickets.ScheduleId > Schedules.Id
+Ref: Tickets.BuyerId > Users.Id
